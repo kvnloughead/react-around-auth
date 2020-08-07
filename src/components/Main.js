@@ -2,34 +2,8 @@ import React from "react";
 import PopupWithForm from "./PopupWithForm";
 import PopupWithImage from "./PopupWithImage";
 
-function Main() {
-  function handleEditAvatarClick() {
-    document
-      .querySelector(".popup__container_type_avatar")
-      .classList.add("popup__container_visible");
-    document
-      .querySelector(".popup__overlay")
-      .classList.add("popup__overlay_visible");
-  }
-
-  function handleEditProfileClick() {
-    document
-      .querySelector(".popup__container_type_edit")
-      .classList.add("popup__container_visible");
-    document
-      .querySelector(".popup__overlay")
-      .classList.add("popup__overlay_visible");
-  }
-
-  function handleAddPlaceClick() {
-    document
-      .querySelector(".popup__container_type_add")
-      .classList.add("popup__container_visible");
-    document
-      .querySelector(".popup__overlay")
-      .classList.add("popup__overlay_visible");
-  }
-
+function Main(props) {
+  console.log(props)
   return (
     <main>
       <section className="profile">
@@ -38,7 +12,7 @@ function Main() {
           <button
             className="button button_action_change-avatar"
             aria-label="open-change-avatar-modal"
-            onClick={handleEditAvatarClick}
+            onClick={props.onEditAvatar}
           ></button>
         </div>
         <div className="profile__info">
@@ -49,13 +23,13 @@ function Main() {
           <button
             className="button button_action_edit"
             aria-label="open-edit-profile-modal"
-            onClick={handleEditProfileClick}
+            onClick={props.onEditProfile}
           ></button>
         </div>
         <button
           className="button button_action_add"
           aria-label="open-new-card-modal"
-          onClick={handleAddPlaceClick}
+          onClick={props.onAddPlace}
         ></button>
       </section>
 
@@ -83,8 +57,7 @@ function Main() {
         </ul>
       </div>
 
-      <div className="popup__overlay"></div>
-      <PopupWithForm name="delete" title="Are you sure?">
+      <PopupWithForm name="delete" title="Are you sure?" isOpen={false} >
         <button
           className="button button_action_submit"
           type="submit"
@@ -95,7 +68,7 @@ function Main() {
         </button>
       </PopupWithForm>
 
-      <PopupWithForm name="avatar" title="Change profile picture">
+      <PopupWithForm name="avatar" title="Change profile picture" isOpen={props.isEditAvatarPopupOpen}>
         <input
           className="popup__input"
           type="url"
@@ -117,7 +90,7 @@ function Main() {
         </button>
       </PopupWithForm>
 
-      <PopupWithForm name="edit" title="Edit profile">
+      <PopupWithForm name="edit" title="Edit profile" isOpen={props.isEditProfilePopupOpen}>
         <input
           className="popup__input"
           type="text"
@@ -149,8 +122,7 @@ function Main() {
           Save
         </button>
       </PopupWithForm>
-
-      <PopupWithForm name="add" title="New place">
+      <PopupWithForm name="add" title="New place" isOpen={props.isAddPlacePopupOpen}>
         <input
           className="popup__input"
           type="text"

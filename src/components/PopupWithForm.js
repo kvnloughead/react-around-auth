@@ -1,8 +1,19 @@
-import React from 'react';
+import React from "react";
 
 function PopupWithForm(props) {
   return (
-    <div className={`popup__container popup__container_type_${props.name}`}>
+    <>
+      <div
+        className={
+          "popup__overlay" + (props.isOpen ? ' popup__overlay_visible' : '')
+        }
+      ></div>
+      <div
+        className={
+          `popup__container popup__container_type_${props.name}` +
+          (props.isOpen ? " popup__container_visible" : "")
+        }
+      >
         <button
           className="button button_action_close"
           type="reset"
@@ -19,7 +30,8 @@ function PopupWithForm(props) {
           {props.children}
         </form>
       </div>
-  )
+    </>
+  );
 }
 
 export default PopupWithForm;
