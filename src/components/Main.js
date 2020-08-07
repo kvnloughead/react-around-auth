@@ -1,5 +1,6 @@
 import React from "react";
 import PopupWithForm from "./PopupWithForm";
+import PopupWithImage from "./PopupWithImage";
 
 function Main() {
   function handleEditAvatarClick() {
@@ -181,17 +182,7 @@ function Main() {
       </PopupWithForm>
 
       <div className="popup__overlay">
-        <template id="image-popup-template">
-          <figure className="popup__image-container popup__container_type_image">
-            <button
-              className="button button_action_close"
-              type="reset"
-              aria-label="close-image-popup"
-            ></button>
-            <img src="#" alt="" className="popup__image" />
-            <figcaption className="popup__image-caption"></figcaption>
-          </figure>
-        </template>
+        <PopupWithImage />
       </div>
     </main>
   );

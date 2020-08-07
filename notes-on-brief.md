@@ -7,4 +7,4 @@
 - `<body> cannot appear as a child of <div>.` error seems inevitable given the project instructions, and no mention is made of
   it.  How to fix it?  Change `body` to something else?  
 
-- 
+- Is porting PopupWithImage put in the right place?   There is no way for us to check if we've done it correctly since the cards do not appear yet.
