@@ -1,31 +1,39 @@
-import React from 'react';
+import React from "react";
+import PopupWithForm from "./PopupWithForm";
 
 function Main() {
-
   function handleEditAvatarClick() {
-    document.querySelector('.popup__container_type_avatar').classList.add('popup__container_visible');
-    document.querySelector('.popup__overlay').classList.add('popup__overlay_visible');
+    document
+      .querySelector(".popup__container_type_avatar")
+      .classList.add("popup__container_visible");
+    document
+      .querySelector(".popup__overlay")
+      .classList.add("popup__overlay_visible");
   }
 
   function handleEditProfileClick() {
-    document.querySelector('.popup__container_type_edit').classList.add('popup__container_visible');
-    document.querySelector('.popup__overlay').classList.add('popup__overlay_visible');
+    document
+      .querySelector(".popup__container_type_edit")
+      .classList.add("popup__container_visible");
+    document
+      .querySelector(".popup__overlay")
+      .classList.add("popup__overlay_visible");
   }
 
   function handleAddPlaceClick() {
-    document.querySelector('.popup__container_type_add').classList.add('popup__container_visible');
-    document.querySelector('.popup__overlay').classList.add('popup__overlay_visible');
+    document
+      .querySelector(".popup__container_type_add")
+      .classList.add("popup__container_visible");
+    document
+      .querySelector(".popup__overlay")
+      .classList.add("popup__overlay_visible");
   }
 
   return (
     <main>
       <section className="profile">
         <div>
-          <img
-            src="#"
-            alt="Avatar"
-            className="profile__image"
-          />
+          <img src="#" alt="Avatar" className="profile__image" />
           <button
             className="button button_action_change-avatar"
             aria-label="open-change-avatar-modal"
@@ -75,158 +83,102 @@ function Main() {
       </div>
 
       <div className="popup__overlay"></div>
-      <div className="popup__container popup__container_type_delete">
+      <PopupWithForm name="delete" title="Are you sure?">
         <button
-          className="button button_action_close"
-          type="reset"
-          aria-label="close-delete-modal"
-        ></button>
-        <h2 className="popup__title">Are you sure?</h2>
-        <form
-          id="delete-form"
-          name="deleteForm"
-          className="popup__form"
-          action="#"
-          noValidate
+          className="button button_action_submit"
+          type="submit"
+          value="Save"
+          aria-label="confirm-delete-card"
         >
-          <button
-            className="button button_action_submit"
-            type="submit"
-            value="Save"
-            aria-label="confirm-delete-card"
-          >
-            Yes
-          </button>
-        </form>
-      </div>
+          Yes
+        </button>
+      </PopupWithForm>
 
-      <div className="popup__container popup__container_type_avatar">
+      <PopupWithForm name="avatar" title="Change profile picture">
+        <input
+          className="popup__input"
+          type="url"
+          id="avatar"
+          name="avatar"
+          placeholder="Enter link to image"
+          minLength="2"
+          required
+        />
+        <span className="popup__input-error" id="avatar-input-error"></span>
+
         <button
-          className="button button_action_close"
-          type="reset"
-          aria-label="close-change-avatar-modal"
-        ></button>
-        <h2 className="popup__title">Change profile picture</h2>
-        <form
-          id="avatar-form"
-          name="avatarForm"
-          className="popup__form"
-          action="#"
-          noValidate
+          className="button button_action_submit button_inactive"
+          type="submit"
+          value="Save"
+          aria-label="submit-change-avatar"
         >
-          <input
-            className="popup__input"
-            type="url"
-            id="avatar"
-            name="avatar"
-            placeholder="Enter link to image"
-            minLength="2"
-            required
-          />
-          <span className="popup__input-error" id="avatar-input-error"></span>
+          Save
+        </button>
+      </PopupWithForm>
 
-          <button
-            className="button button_action_submit button_inactive"
-            type="submit"
-            value="Save"
-            aria-label="submit-change-avatar"
-          >
-            Save
-          </button>
-        </form>
-      </div>
-
-      <div className="popup__container popup__container_type_edit">
+      <PopupWithForm name="edit" title="Edit profile">
+        <input
+          className="popup__input"
+          type="text"
+          id="name"
+          name="name"
+          placeholder="Name"
+          minLength="2"
+          maxLength="40"
+          required
+        />
+        <span className="popup__input-error" id="name-input-error"></span>
+        <input
+          className="popup__input"
+          type="text"
+          id="job"
+          name="job"
+          placeholder="About me"
+          minLength="2"
+          maxLength="200"
+          required
+        />
+        <span className="popup__input-error" id="job-input-error"></span>
         <button
-          className="button button_action_close"
-          type="reset"
-          aria-label="close-edit-profile-modal"
-        ></button>
-        <h2 className="popup__title">Edit profile</h2>
-        <form
-          id="edit-form"
-          name="editForm"
-          className="popup__form"
-          action="#"
-          noValidate
+          className="button button_action_submit button_inactive"
+          type="submit"
+          value="Save"
+          aria-label="submit-edit-profile"
         >
-          <input
-            className="popup__input"
-            type="text"
-            id="name"
-            name="name"
-            placeholder="Name"
-            minLength="2"
-            maxLength="40"
-            required
-          />
-          <span className="popup__input-error" id="name-input-error"></span>
-          <input
-            className="popup__input"
-            type="text"
-            id="job"
-            name="job"
-            placeholder="About me"
-            minLength="2"
-            maxLength="200"
-            required
-          />
-          <span className="popup__input-error" id="job-input-error"></span>
-          <button
-            className="button button_action_submit button_inactive"
-            type="submit"
-            value="Save"
-            aria-label="submit-edit-profile"
-          >
-            Save
-          </button>
-        </form>
-      </div>
+          Save
+        </button>
+      </PopupWithForm>
 
-      <div className="popup__container popup__container_type_add">
+      <PopupWithForm name="add" title="New place">
+        <input
+          className="popup__input"
+          type="text"
+          id="title"
+          name="title"
+          placeholder="Title"
+          minLength="1"
+          maxLength="30"
+          required
+        />
+        <span className="popup__input-error" id="title-input-error"></span>
+        <input
+          className="popup__input"
+          type="url"
+          id="imageUrl"
+          name="imageUrl"
+          placeholder="Image link"
+          required
+        />
+        <span className="popup__input-error" id="imageUrl-input-error"></span>
         <button
-          className="button button_action_close"
-          type="reset"
-          aria-label="close-new-card-modal"
-        ></button>
-        <h2 className="popup__title">New place</h2>
-        <form
-          id="add-form"
-          name="addForm"
-          className="popup__form"
-          action="#"
-          noValidate
+          className="button button_action_submit button_inactive"
+          type="submit"
+          value="Create"
+          aria-label="submit-new-card-modal"
         >
-          <input
-            className="popup__input"
-            type="text"
-            id="title"
-            name="title"
-            placeholder="Title"
-            minLength="1"
-            maxLength="30"
-            required
-          />
-          <span className="popup__input-error" id="title-input-error"></span>
-          <input
-            className="popup__input"
-            type="url"
-            id="imageUrl"
-            name="imageUrl"
-            placeholder="Image link"
-            required
-          />
-          <span className="popup__input-error" id="imageUrl-input-error"></span>
-          <button
-            className="button button_action_submit button_inactive"
-            type="submit"
-            value="Create"
-            aria-label="submit-new-card-modal"
-          >
-            Create
-          </button>
-        </form>
-      </div>
+          Create
+        </button>
+      </PopupWithForm>
 
       <div className="popup__overlay">
         <template id="image-popup-template">
@@ -242,7 +194,7 @@ function Main() {
         </template>
       </div>
     </main>
-  )
+  );
 }
 
 export default Main;
