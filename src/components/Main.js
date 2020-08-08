@@ -1,14 +1,31 @@
 import React from "react";
+import api from "../utils/Api";  
 import PopupWithForm from "./PopupWithForm";
 import PopupWithImage from "./PopupWithImage";
 
 function Main(props) {
-  console.log(props)
+
+  const [userName, setUserName] = React.useState("");
+  const [userDescription, setUserDescription] = React.useState("");
+  const [userAvatar, setUserAvatar] = React.useState("");
+
+  React.useEffect(() => {
+    api.loadUserInfo()
+      .then((res) => {
+        setUserName(res.name);
+        setUserDescription(res.about);
+        setUserAvatar(res.avatar);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  })
+
   return (
     <main>
       <section className="profile">
         <div>
-          <img src="#" alt="Avatar" className="profile__image" />
+          <img src={userAvatar} alt="Avatar" className="profile__image" />
           <button
             className="button button_action_change-avatar"
             aria-label="open-change-avatar-modal"
@@ -17,8 +34,8 @@ function Main(props) {
         </div>
         <div className="profile__info">
           <div className="profile__text">
-            <h2 className="profile__name">Kevin</h2>
-            <p className="profile__job">Not an explorer</p>
+            <h2 className="profile__name">{userName}</h2>
+            <p className="profile__job">{userDescription}</p>
           </div>
           <button
             className="button button_action_edit"
@@ -57,7 +74,12 @@ function Main(props) {
         </ul>
       </div>
 
-      <PopupWithForm name="delete" title="Are you sure?" isOpen={false} >
+      <PopupWithForm
+        name="delete"
+        title="Are you sure?"
+        isOpen={false}
+        onClose={props.onCloseButtons}
+      >
         <button
           className="button button_action_submit"
           type="submit"
@@ -68,7 +90,12 @@ function Main(props) {
         </button>
       </PopupWithForm>
 
-      <PopupWithForm name="avatar" title="Change profile picture" isOpen={props.isEditAvatarPopupOpen}>
+      <PopupWithForm
+        name="avatar"
+        title="Change profile picture"
+        isOpen={props.isEditAvatarPopupOpen}
+        onClose={props.onCloseButtons}
+      >
         <input
           className="popup__input"
           type="url"
@@ -90,7 +117,12 @@ function Main(props) {
         </button>
       </PopupWithForm>
 
-      <PopupWithForm name="edit" title="Edit profile" isOpen={props.isEditProfilePopupOpen}>
+      <PopupWithForm
+        name="edit"
+        title="Edit profile"
+        isOpen={props.isEditProfilePopupOpen}
+        onClose={props.onCloseButtons}
+      >
         <input
           className="popup__input"
           type="text"
@@ -122,7 +154,12 @@ function Main(props) {
           Save
         </button>
       </PopupWithForm>
-      <PopupWithForm name="add" title="New place" isOpen={props.isAddPlacePopupOpen}>
+      <PopupWithForm
+        name="add"
+        title="New place"
+        isOpen={props.isAddPlacePopupOpen}
+        onClose={props.onCloseButtons}
+      >
         <input
           className="popup__input"
           type="text"

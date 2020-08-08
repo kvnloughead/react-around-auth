@@ -18,6 +18,7 @@ function PopupWithForm(props) {
           className="button button_action_close"
           type="reset"
           aria-label={`close-${props.name}-modal`}
+          onClick={props.onClose}
         ></button>
         <h2 className="popup__title">{props.title}</h2>
         <form

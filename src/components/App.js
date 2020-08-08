@@ -4,30 +4,38 @@ import Main from "./Main";
 import Footer from "./Footer";
 
 function App(props) {
-
-  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
-  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(
+    false
+  );
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(
+    false
+  );
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
 
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);
-
   }
 
   function handleEditProfileClick() {
     setIsEditProfilePopupOpen(true);
-
   }
 
   function handleAddPlaceClick() {
     setIsAddPlacePopupOpen(true);
+  }
 
+  function closeAllPopups() {
+    setIsAddPlacePopupOpen(false);
+    setIsEditAvatarPopupOpen(false);
+    setIsEditProfilePopupOpen(false);
+    console.log('clicking')
   }
 
   return (
-    <body className="page">
+    <>
       <Header />
       <Main
+        onCloseButtons={closeAllPopups}
         onEditProfile={handleEditProfileClick}
         onAddPlace={handleAddPlaceClick}
         onEditAvatar={handleEditAvatarClick}
@@ -36,7 +44,7 @@ function App(props) {
         isEditAvatarPopupOpen={isEditAvatarPopupOpen}
       />
       <Footer />
-    </body>
+    </>
   );
 }
 
