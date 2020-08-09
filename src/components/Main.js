@@ -9,6 +9,8 @@ function Main(props) {
   const [userDescription, setUserDescription] = React.useState("");
   const [userAvatar, setUserAvatar] = React.useState("");
 
+  const [cards, setCards] = React.useState([]);
+
   React.useEffect(() => {
     api.loadUserInfo()
       .then((res) => {
@@ -19,7 +21,26 @@ function Main(props) {
       .catch((err) => {
         console.log(err);
       });
-  })
+  }, [userName, userDescription, userAvatar]);
+    
+  React.useEffect(()=> {
+    api.getInitialCards()
+      .then((data) => {
+        // data.forEach(item => {
+          // setCards([...cards, item]);
+          // return cards;
+        setCards(...cards, data);
+        })
+      
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [cards]);
+
+    
+  
+  
+
 
   return (
     <main>
@@ -52,25 +73,31 @@ function Main(props) {
 
       <div className="places">
         <ul className="places__grid">
-          <template id="card-template">
-            <li className="place">
-              <div className="place__image"></div>
-              <button
-                className="place__delete-btn place__delete-btn_hidden"
-                aria-label="delete-card"
-              ></button>
-              <div className="place__footer">
-                <h2 className="place__name"></h2>
-                <div className="place__like-container">
-                  <button
-                    className="place__like-btn"
-                    aria-label="like-or-unlike-card"
-                  ></button>
-                  <p className="place__like-counter"></p>
-                </div>
-              </div>
-            </li>
-          </template>
+          {/* <template id="card-template"> */}
+          {console.log(cards)}
+          {cards.map((card) => (
+             <li key={card._id} className="place">
+             <div className="place__image" style={{ backgroundImage: `url(${card.link})` }}></div>
+             <button
+               className="place__delete-btn place__delete-btn_hidden"
+               aria-label="delete-card"
+             ></button>
+             <div className="place__footer">
+               <h2 className="place__name">{card.name}</h2>
+               <div className="place__like-container">
+                 <button
+                   className="place__like-btn"
+                   aria-label="like-or-unlike-card"
+                 ></button>
+                 <p className="place__like-counter"></p>
+               </div>
+             </div>
+           </li>
+          ))}
+             
+          
+           
+          {/* </template> */}
         </ul>
       </div>
 
