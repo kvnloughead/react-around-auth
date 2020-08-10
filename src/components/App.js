@@ -26,7 +26,6 @@ function App(props) {
   }
 
   function handleCardClick(card) {
-    console.log(card);
     setSelectedCard(card);
   }
 
