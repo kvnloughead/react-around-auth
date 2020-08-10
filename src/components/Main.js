@@ -1,18 +1,18 @@
 import React from "react";
-import api from "../utils/Api";  
+import api from "../utils/Api";
+import Card from "./Card";
 import PopupWithForm from "./PopupWithForm";
 import PopupWithImage from "./PopupWithImage";
 
 function Main(props) {
-
   const [userName, setUserName] = React.useState("");
   const [userDescription, setUserDescription] = React.useState("");
   const [userAvatar, setUserAvatar] = React.useState("");
-
   const [cards, setCards] = React.useState([]);
 
   React.useEffect(() => {
-    api.loadUserInfo()
+    api
+      .loadUserInfo()
       .then((res) => {
         setUserName(res.name);
         setUserDescription(res.about);
@@ -22,22 +22,18 @@ function Main(props) {
         console.log(err);
       });
   }, [userName, userDescription, userAvatar]);
-    
-  React.useEffect(()=> {
-    api.getInitialCards()
+
+  React.useEffect(() => {
+    api
+      .getInitialCards()
       .then((data) => {
         setCards(cards.concat(data));
-        })
-      
+      })
+
       .catch((err) => {
         console.log(err);
       });
   }, []);
-
-    
-  
-  
-
 
   return (
     <main>
@@ -71,23 +67,7 @@ function Main(props) {
       <div className="places">
         <ul className="places__grid">
           {cards.map((card) => (
-             <li key={card._id} className="place">
-             <div className="place__image" style={{ backgroundImage: `url(${card.link})` }}></div>
-             <button
-               className="place__delete-btn place__delete-btn_hidden"
-               aria-label="delete-card"
-             ></button>
-             <div className="place__footer">
-               <h2 className="place__name">{card.name}</h2>
-               <div className="place__like-container">
-                 <button
-                   className="place__like-btn"
-                   aria-label="like-or-unlike-card"
-                 ></button>
-                 <p className="place__like-counter"></p>
-               </div>
-             </div>
-           </li>
+            <Card card={card} />
           ))}
         </ul>
       </div>
@@ -209,7 +189,7 @@ function Main(props) {
       </PopupWithForm>
 
       <div className="popup__overlay">
-        <PopupWithImage />
+        <PopupWithImage onClose={props.onCloseButtons} />
       </div>
     </main>
   );
