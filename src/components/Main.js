@@ -26,16 +26,13 @@ function Main(props) {
   React.useEffect(()=> {
     api.getInitialCards()
       .then((data) => {
-        // data.forEach(item => {
-          // setCards([...cards, item]);
-          // return cards;
-        setCards(...cards, data);
+        setCards(cards.concat(data));
         })
       
       .catch((err) => {
         console.log(err);
       });
-  }, [cards]);
+  }, []);
 
     
   
@@ -73,8 +70,6 @@ function Main(props) {
 
       <div className="places">
         <ul className="places__grid">
-          {/* <template id="card-template"> */}
-          {console.log(cards)}
           {cards.map((card) => (
              <li key={card._id} className="place">
              <div className="place__image" style={{ backgroundImage: `url(${card.link})` }}></div>
@@ -94,10 +89,6 @@ function Main(props) {
              </div>
            </li>
           ))}
-             
-          
-           
-          {/* </template> */}
         </ul>
       </div>
 

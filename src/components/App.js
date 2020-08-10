@@ -28,7 +28,6 @@ function App(props) {
     setIsAddPlacePopupOpen(false);
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false);
-    console.log('clicking')
   }
 
   return (
