@@ -6,6 +6,9 @@ function Card(props) {
       <div
         className="place__image"
         style={{ backgroundImage: `url(${props.card.link})` }}
+        onClick={() => {
+          props.onCardClick(props.card);
+        }}
       ></div>
       <button
         className="place__delete-btn place__delete-btn_hidden"

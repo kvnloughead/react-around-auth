@@ -27,7 +27,7 @@ function Main(props) {
     api
       .getInitialCards()
       .then((data) => {
-        setCards(cards.concat(data));
+        setCards((cards) => [...cards, ...data]);
       })
 
       .catch((err) => {
@@ -67,7 +67,7 @@ function Main(props) {
       <div className="places">
         <ul className="places__grid">
           {cards.map((card) => (
-            <Card card={card} />
+            <Card key={card._id} card={card} onCardClick={props.onCardClick} />
           ))}
         </ul>
       </div>
@@ -188,9 +188,10 @@ function Main(props) {
         </button>
       </PopupWithForm>
 
-      <div className="popup__overlay">
-        <PopupWithImage onClose={props.onCloseButtons} />
-      </div>
+      <PopupWithImage
+        onClose={props.onCloseButtons}
+        card={props.selectedCard}
+      />
     </main>
   );
 }
