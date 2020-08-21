@@ -14,7 +14,7 @@ class Api {
     });
   }
 
-  loadUserInfo() {
+  getUserInfo() {
     return fetch(this.baseUrl + "/users/me", {
       headers: this.headers,
     }).then((res) => {

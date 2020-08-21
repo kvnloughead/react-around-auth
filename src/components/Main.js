@@ -3,25 +3,14 @@ import api from "../utils/Api";
 import Card from "./Card";
 import PopupWithForm from "./PopupWithForm";
 import PopupWithImage from "./PopupWithImage";
+import { CurrentUserContext } from "../contexts/CurrentUserContext";
+
+
 
 function Main(props) {
-  const [userName, setUserName] = React.useState("");
-  const [userDescription, setUserDescription] = React.useState("");
-  const [userAvatar, setUserAvatar] = React.useState("");
-  const [cards, setCards] = React.useState([]);
 
-  React.useEffect(() => {
-    api
-      .loadUserInfo()
-      .then((res) => {
-        setUserName(res.name);
-        setUserDescription(res.about);
-        setUserAvatar(res.avatar);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [userName, userDescription, userAvatar]);
+  const currentUser = React.useContext(CurrentUserContext);
+  const [cards, setCards] = React.useState([]);
 
   React.useEffect(() => {
     api
@@ -39,7 +28,7 @@ function Main(props) {
     <main>
       <section className="profile">
         <div>
-          <img src={userAvatar} alt="Avatar" className="profile__image" />
+          <img src={currentUser && currentUser.avatar} alt="Avatar" className="profile__image" />
           <button
             className="button button_action_change-avatar"
             aria-label="open-change-avatar-modal"
@@ -48,8 +37,8 @@ function Main(props) {
         </div>
         <div className="profile__info">
           <div className="profile__text">
-            <h2 className="profile__name">{userName}</h2>
-            <p className="profile__job">{userDescription}</p>
+            <h2 className="profile__name">{currentUser && currentUser.name}</h2>
+            <p className="profile__job">{currentUser && currentUser.about}</p>
           </div>
           <button
             className="button button_action_edit"
