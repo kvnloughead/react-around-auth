@@ -5,12 +5,17 @@ import PopupWithForm from "./PopupWithForm";
 import PopupWithImage from "./PopupWithImage";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
-
-
 function Main(props) {
-
   const currentUser = React.useContext(CurrentUserContext);
   const [cards, setCards] = React.useState([]);
+
+  function handleCardLike(card) {
+    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+    api.updateLikes(card._id, isLiked).then((newCard) => {
+      const newCards = cards.map((c) => (c._id === card._id ? newCard : c));
+      setCards(newCards);
+    });
+  }
 
   React.useEffect(() => {
     api
@@ -28,7 +33,11 @@ function Main(props) {
     <main>
       <section className="profile">
         <div>
-          <img src={currentUser && currentUser.avatar} alt="Avatar" className="profile__image" />
+          <img
+            src={currentUser && currentUser.avatar}
+            alt="Avatar"
+            className="profile__image"
+          />
           <button
             className="button button_action_change-avatar"
             aria-label="open-change-avatar-modal"
@@ -56,7 +65,7 @@ function Main(props) {
       <div className="places">
         <ul className="places__grid">
           {cards.map((card) => (
-            <Card key={card._id} card={card} onCardClick={props.onCardClick} />
+            <Card key={card._id} card={card} onCardClick={props.onCardClick} onCardLike={handleCardLike} />
           ))}
         </ul>
       </div>

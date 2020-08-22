@@ -34,6 +34,9 @@ function Card(props) {
           <button
             className={cardLikeButtonClassName}
             aria-label="like-or-unlike-card"
+            onClick={() => {
+              props.onCardLike(props.card);
+            }}
           ></button>
           <p className="place__like-counter"></p>
         </div>
