@@ -17,6 +17,19 @@ function Main(props) {
     });
   }
 
+  function handleCardDelete(card) {
+    const isOwned = card.owner._id === currentUser._id;
+    console.log(isOwned);
+    api
+      .deleteCard(card._id)
+      .then(() => {
+        setCards(cards.filter((c) => c._id !== card._id));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
   React.useEffect(() => {
     api
       .getInitialCards()
@@ -65,7 +78,13 @@ function Main(props) {
       <div className="places">
         <ul className="places__grid">
           {cards.map((card) => (
-            <Card key={card._id} card={card} onCardClick={props.onCardClick} onCardLike={handleCardLike} />
+            <Card
+              key={card._id}
+              card={card}
+              onCardClick={props.onCardClick}
+              onCardLike={handleCardLike}
+              onCardDelete={handleCardDelete}
+            />
           ))}
         </ul>
       </div>

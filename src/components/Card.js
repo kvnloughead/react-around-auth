@@ -6,9 +6,9 @@ function Card(props) {
 
   const currentUser = React.useContext(CurrentUserContext);
 
-  const isOwn = currentUser && (props.card.owner._id === currentUser._id);
+  const isOwned = currentUser && (props.card.owner._id === currentUser._id);
   const cardDeleteButtonClassName = (
-    `place__delete-btn ${!isOwn && 'place__delete-btn_hidden'}`
+    `place__delete-btn ${!isOwned && 'place__delete-btn_hidden'}`
   );
 
   const isLiked = props.card.likes.some(i => i._id === currentUser._id);
@@ -25,8 +25,10 @@ function Card(props) {
       ></div>
       <button
         className={cardDeleteButtonClassName}
-        
         aria-label="delete-card"
+        onClick={() => {
+          props.onCardDelete(props.card);
+        }}
       ></button>
       <div className="place__footer">
         <h2 className="place__name">{props.card.name}</h2>
