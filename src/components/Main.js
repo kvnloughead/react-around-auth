@@ -4,6 +4,7 @@ import Card from "./Card";
 import PopupWithForm from "./PopupWithForm";
 import PopupWithImage from "./PopupWithImage";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
+import EditProfilePopup from "./EditProfilePopup";
 
 function Main(props) {
   const currentUser = React.useContext(CurrentUserContext);
@@ -131,8 +132,9 @@ function Main(props) {
           Save
         </button>
       </PopupWithForm>
-
-      <PopupWithForm
+      
+      <EditProfilePopup isOpen={props.isEditProfilePopupOpen} onClose={props.onCloseButtons} />
+      {/* <PopupWithForm
         name="edit"
         title="Edit profile"
         isOpen={props.isEditProfilePopupOpen}
@@ -168,7 +170,8 @@ function Main(props) {
         >
           Save
         </button>
-      </PopupWithForm>
+      </PopupWithForm> */}
+
       <PopupWithForm
         name="add"
         title="New place"

@@ -48,7 +48,7 @@ function App(props) {
       .catch((err) => {
         console.log(err);
       });
-  }, [currentUser]);
+  }, []);
 
 
   return (
