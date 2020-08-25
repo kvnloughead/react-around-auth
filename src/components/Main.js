@@ -4,7 +4,6 @@ import Card from "./Card";
 import PopupWithForm from "./PopupWithForm";
 import PopupWithImage from "./PopupWithImage";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
-import EditProfilePopup from "./EditProfilePopup";
 
 function Main(props) {
   const currentUser = React.useContext(CurrentUserContext);
@@ -133,45 +132,6 @@ function Main(props) {
         </button>
       </PopupWithForm>
       
-      <EditProfilePopup isOpen={props.isEditProfilePopupOpen} onClose={props.onCloseButtons} />
-      {/* <PopupWithForm
-        name="edit"
-        title="Edit profile"
-        isOpen={props.isEditProfilePopupOpen}
-        onClose={props.onCloseButtons}
-      >
-        <input
-          className="popup__input"
-          type="text"
-          id="name"
-          name="name"
-          placeholder="Name"
-          minLength="2"
-          maxLength="40"
-          required
-        />
-        <span className="popup__input-error" id="name-input-error"></span>
-        <input
-          className="popup__input"
-          type="text"
-          id="job"
-          name="job"
-          placeholder="About me"
-          minLength="2"
-          maxLength="200"
-          required
-        />
-        <span className="popup__input-error" id="job-input-error"></span>
-        <button
-          className="button button_action_submit button_inactive"
-          type="submit"
-          value="Save"
-          aria-label="submit-edit-profile"
-        >
-          Save
-        </button>
-      </PopupWithForm> */}
-
       <PopupWithForm
         name="add"
         title="New place"

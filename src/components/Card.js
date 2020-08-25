@@ -11,7 +11,7 @@ function Card(props) {
     `place__delete-btn ${!isOwned && 'place__delete-btn_hidden'}`
   );
 
-  const isLiked = props.card.likes.some(i => i._id === currentUser._id);
+  const isLiked = currentUser && props.card.likes.some(i => i._id === currentUser._id);
   const cardLikeButtonClassName = `place__like-btn ${isLiked && 'place__like-btn_clicked'}`;
 
   return (

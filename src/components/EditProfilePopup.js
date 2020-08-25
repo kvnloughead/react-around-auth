@@ -22,13 +22,23 @@ function EditProfilePopup(props) {
   function handleDescriptionChange(e) {
     setDescription(e.target.value);
   }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    props.onUpdateUser({
+      name,
+      about: description,
+    });
+  }
   
   return (
+
     <PopupWithForm
         name="edit"
         title="Edit profile"
         isOpen={props.isOpen}
         onClose={props.onClose}
+        onSubmit={handleSubmit}
       >
         <input
           className="popup__input"

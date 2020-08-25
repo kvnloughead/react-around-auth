@@ -2,6 +2,7 @@ import React from "react";
 import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
+import EditProfilePopup from "./EditProfilePopup";
 import api from "../utils/Api";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
@@ -32,6 +33,14 @@ function App(props) {
     setSelectedCard(card);
   }
 
+  function handleUpdateUser({ name, about }) {
+    api
+      .setUserInfo({ name, about })
+      .then((data) => 
+        {setCurrentUser(data)});
+    closeAllPopups();
+  }
+
   function closeAllPopups() {
     setIsAddPlacePopupOpen(false);
     setIsEditAvatarPopupOpen(false);
@@ -50,18 +59,21 @@ function App(props) {
       });
   }, []);
 
-
   return (
     <>
       <CurrentUserContext.Provider value={currentUser}>
         <Header />
+        <EditProfilePopup
+          isOpen={isEditProfilePopupOpen}
+          onClose={closeAllPopups}
+          onUpdateUser={handleUpdateUser}
+        />
         <Main
           onCloseButtons={closeAllPopups}
           onEditProfile={handleEditProfileClick}
           onAddPlace={handleAddPlaceClick}
           onEditAvatar={handleEditAvatarClick}
           onCardClick={handleCardClick}
-          isEditProfilePopupOpen={isEditProfilePopupOpen}
           isAddPlacePopupOpen={isAddPlacePopupOpen}
           isEditAvatarPopupOpen={isEditAvatarPopupOpen}
           selectedCard={selectedCard}
