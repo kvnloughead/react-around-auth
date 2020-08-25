@@ -24,7 +24,7 @@ class Api {
     });
   }
 
-  changeAvatar(link) {
+  setAvatar(link) {
     return fetch(this.baseUrl + "/users/me/avatar", {
       method: "PATCH",
       headers: this.headers,

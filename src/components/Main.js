@@ -18,8 +18,6 @@ function Main(props) {
   }
 
   function handleCardDelete(card) {
-    const isOwned = card.owner._id === currentUser._id;
-    console.log(isOwned);
     api
       .deleteCard(card._id)
       .then(() => {
@@ -50,11 +48,11 @@ function Main(props) {
             src={currentUser && currentUser.avatar}
             alt="Avatar"
             className="profile__image"
+            onClick={props.onEditAvatar}
           />
           <button
             className="button button_action_change-avatar"
             aria-label="open-change-avatar-modal"
-            onClick={props.onEditAvatar}
           ></button>
         </div>
         <div className="profile__info">
@@ -105,7 +103,7 @@ function Main(props) {
         </button>
       </PopupWithForm>
 
-      <PopupWithForm
+      {/* <PopupWithForm
         name="avatar"
         title="Change profile picture"
         isOpen={props.isEditAvatarPopupOpen}
@@ -130,7 +128,7 @@ function Main(props) {
         >
           Save
         </button>
-      </PopupWithForm>
+      </PopupWithForm> */}
       
       <PopupWithForm
         name="add"
