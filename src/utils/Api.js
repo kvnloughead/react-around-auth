@@ -4,7 +4,7 @@ class Api {
     this.headers = options.headers;
   }
 
-  getInitialCards() {
+  getCardList() {
     return fetch(this.baseUrl + "/cards", {
       headers: this.headers,
     }).then((res) => {
@@ -54,13 +54,13 @@ class Api {
     });
   }
 
-  addNewCard({ title, imageUrl }) {
+  addNewCard({ title, link }) {
     return fetch(this.baseUrl + "/cards", {
       method: "POST",
       headers: this.headers,
       body: JSON.stringify({
         name: title,
-        link: imageUrl,
+        link,
       }),
     })
     .then((res) => {

@@ -1,5 +1,4 @@
 import React from "react";
-import api from "../utils/Api";
 import Card from "./Card";
 import PopupWithForm from "./PopupWithForm";
 import PopupWithImage from "./PopupWithImage";
@@ -7,38 +6,6 @@ import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 function Main(props) {
   const currentUser = React.useContext(CurrentUserContext);
-  const [cards, setCards] = React.useState([]);
-
-  function handleCardLike(card) {
-    const isLiked = card.likes.some((i) => i._id === currentUser._id);
-    api.updateLikes(card._id, isLiked).then((newCard) => {
-      const newCards = cards.map((c) => (c._id === card._id ? newCard : c));
-      setCards(newCards);
-    });
-  }
-
-  function handleCardDelete(card) {
-    api
-      .deleteCard(card._id)
-      .then(() => {
-        setCards(cards.filter((c) => c._id !== card._id));
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-
-  React.useEffect(() => {
-    api
-      .getInitialCards()
-      .then((data) => {
-        setCards((cards) => [...cards, ...data]);
-      })
-
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
 
   return (
     <main>
@@ -75,13 +42,13 @@ function Main(props) {
 
       <div className="places">
         <ul className="places__grid">
-          {cards.map((card) => (
+          {props.cards.map((card) => (
             <Card
               key={card._id}
               card={card}
               onCardClick={props.onCardClick}
-              onCardLike={handleCardLike}
-              onCardDelete={handleCardDelete}
+              onCardLike={props.onCardLike}
+              onCardDelete={props.onCardDelete}
             />
           ))}
         </ul>
@@ -100,69 +67,6 @@ function Main(props) {
           aria-label="confirm-delete-card"
         >
           Yes
-        </button>
-      </PopupWithForm>
-
-      {/* <PopupWithForm
-        name="avatar"
-        title="Change profile picture"
-        isOpen={props.isEditAvatarPopupOpen}
-        onClose={props.onCloseButtons}
-      >
-        <input
-          className="popup__input"
-          type="url"
-          id="avatar"
-          name="avatar"
-          placeholder="Enter link to image"
-          minLength="2"
-          required
-        />
-        <span className="popup__input-error" id="avatar-input-error"></span>
-
-        <button
-          className="button button_action_submit button_inactive"
-          type="submit"
-          value="Save"
-          aria-label="submit-change-avatar"
-        >
-          Save
-        </button>
-      </PopupWithForm> */}
-      
-      <PopupWithForm
-        name="add"
-        title="New place"
-        isOpen={props.isAddPlacePopupOpen}
-        onClose={props.onCloseButtons}
-      >
-        <input
-          className="popup__input"
-          type="text"
-          id="title"
-          name="title"
-          placeholder="Title"
-          minLength="1"
-          maxLength="30"
-          required
-        />
-        <span className="popup__input-error" id="title-input-error"></span>
-        <input
-          className="popup__input"
-          type="url"
-          id="imageUrl"
-          name="imageUrl"
-          placeholder="Image link"
-          required
-        />
-        <span className="popup__input-error" id="imageUrl-input-error"></span>
-        <button
-          className="button button_action_submit button_inactive"
-          type="submit"
-          value="Create"
-          aria-label="submit-new-card-modal"
-        >
-          Create
         </button>
       </PopupWithForm>
 
