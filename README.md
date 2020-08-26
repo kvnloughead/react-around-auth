@@ -1,20 +1,15 @@
-A port (in progress) of my [Around the US](https://github.com/kvnloughead/web_project_4) picture album project from vanilla JS to React.   The original is deployed [here](https://kvnloughead.github.io/web_project_4/dist/).
+A responsive, single page, picture album project.  It is a part of the [Practicum](https://practicum.yandex.com/) Web Development curriculum, and is a port of an of [this](https://kvnloughead.github.io/web_project_4/) vanilla JS project into React.   Deployed [here](http://kvnloughead.github.io/around-react).  Interactivity includes:
 
-Thus far, all page components including modals have been ported as functional React components.   The modals and the image popup opens and closes, and API calls are made to the server to fetch user info and cards from the database.  
+1. Popup modals for
+   - Updating profile info (including avatar image) 
+   - Adding new picture cards
+   - Deleting cards (user's own cards only)
+2. Liking/unliking cards 
 
-Newly (re)implemented features include:
-
-1. adding of new cards
-2. liking/unliking cards
-3. deleted cards that you own
-4. updating current user info and avatar
+It is a part of the [Practicum](https://practicum.yandex.com/) Web Development curriculum, and is a port (in progress) of this vanilla JS [project](https://kvnloughead.github.io/web_project_4/)  into React.  
 
 ### TODO 
 
 1. delete confirmation popup
 2. form validation
 3. like counter
-4. smaller hand cursor
-
-Deployed [here](http://kvnloughead.github.io/around-react).
-
