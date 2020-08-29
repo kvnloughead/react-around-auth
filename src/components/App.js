@@ -8,7 +8,7 @@ import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
-function App(props) {
+function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(
     false
   );
@@ -75,10 +75,6 @@ function App(props) {
     });
     closeAllPopups();
   }
-
-  React.useEffect(() => {
-    setCards(cards);
-  }, [cards])
 
   function closeAllPopups() {
     setIsAddPlacePopupOpen(false);

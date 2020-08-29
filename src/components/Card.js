@@ -40,7 +40,7 @@ function Card(props) {
               props.onCardLike(props.card);
             }}
           ></button>
-          <p className="place__like-counter"></p>
+          <p className="place__like-counter">{props.card.likes.length}</p>
         </div>
       </div>
     </li>
