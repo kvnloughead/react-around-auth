@@ -9,6 +9,6 @@
 }
 
 .place__like-btn:hover {
-  cursor: url('../../../images/icons/finger.svg'), auto;
+  cursor: pointer;
   opacity: .6;
 }

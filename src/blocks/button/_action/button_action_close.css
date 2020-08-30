@@ -10,7 +10,5 @@
   height: 58px;
 }
 
-.button.button_action_close:hover {
-  cursor: url('../../../images/icons/finger.svg'), auto;	
-}
+
 
