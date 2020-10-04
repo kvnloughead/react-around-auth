@@ -1,0 +1,22 @@
+@import url('./__form/login__form.css');
+@import url('./__link/login__link.css');
+@import url('./__input/login__input.css');
+@import url('./__signup/login__signup.css');
+@import url('./__link-container/login__link-container.css');
+@import url('./__call-out/login__call-out.css');
+@import url('./__title/login__title.css');
+
+.login {
+  height: 100vh;
+  width: 882px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+@media screen and (max-width: 1024px) {
+  .login {
+    width: 100%;
+  }
+}

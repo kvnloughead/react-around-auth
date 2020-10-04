@@ -4,6 +4,7 @@
   border-bottom: 1px solid hsla(0, 0%, 33%, .7);
   box-sizing: border-box;
   width: 882px;
+  margin-top: 45px;;
 }
 
 @media screen and (max-width: 930px) {
@@ -16,24 +17,8 @@
   .header {
     width: calc(100vw + 19px);
     margin-left: -19px;
+    margin-top: 28px;
   }
 }
-
-/* 
-width: 882px;
-}
-
-@media screen and (max-width: 930px) {
-  .footer {
-    
-  }
-}
-
-@media screen and (max-width: 620px) {
-  .footer {
-    width: 282px;
-  }
-} */
-
 
  

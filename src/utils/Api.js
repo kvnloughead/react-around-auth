@@ -91,6 +91,50 @@ class Api {
       }
     });
   }
+
+  register = (username, password, email) => {
+    return fetch(`${this.baseUrl}/auth/register`, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({username, password, email})
+    })
+    .then((response) => {
+      try {
+        if (response.status === 200){
+          return response.json();
+        }
+      } catch(e){
+          return (e)
+      }
+    })
+    .then((res) => {
+      return res;     
+    })
+    .catch((err) => console.log(err));
+  };
+  
+  authorize = (identifier, password) => {
+    return fetch(`${this.baseUrl}/auth/local`, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({identifier, password})
+    })
+    .then((response => response.json()))
+    .then((data) => {
+      if (data.jwt){
+        // if user has a token, save it to local storage
+        localStorage.setItem('jwt', data.jwt);
+        return data;
+          }
+    })
+    .catch(err => console.log(err))
+  };
 }
 
 const api = new Api({
