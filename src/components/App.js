@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Header from './Header';
+import ProtectedRoute from './ProtectedRoute';
 import Main from './Main';
 import Footer from './Footer';
 import api from '../utils/Api';
@@ -22,6 +23,7 @@ function App() {
   const [cards, setCards] = React.useState([]);
   const [selectedCard, setSelectedCard] = React.useState(null);
   const [currentUser, setCurrentUser] = React.useState(null);
+  const [loggedIn, setLoggedIn] = React.useState(false);
 
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);
@@ -136,7 +138,18 @@ function App() {
                 onClose={closeAllPopups}
                 onAddNewCard={handleAddNewCard}
               />
-              <Main
+              <ProtectedRoute path="/" loggedIn={loggedIn} component={Main} onCloseButtons={closeAllPopups}
+                onEditProfile={handleEditProfileClick}
+                onAddPlace={handleAddPlaceClick}
+                onEditAvatar={handleEditAvatarClick}
+                onCardClick={handleCardClick}
+                onCardLike={handleCardLike}
+                onCardDelete={handleCardDelete}
+                isAddPlacePopupOpen={isAddPlacePopupOpen}
+                isEditAvatarPopupOpen={isEditAvatarPopupOpen}
+                cards={cards}
+                selectedCard={selectedCard} />
+              {/* <Main
                 onCloseButtons={closeAllPopups}
                 onEditProfile={handleEditProfileClick}
                 onAddPlace={handleAddPlaceClick}
@@ -148,7 +161,7 @@ function App() {
                 isEditAvatarPopupOpen={isEditAvatarPopupOpen}
                 cards={cards}
                 selectedCard={selectedCard}
-              />
+              /> */}
               <Footer />
             </Route>
           </Switch>
