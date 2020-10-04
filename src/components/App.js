@@ -8,6 +8,7 @@ import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from './AddPlacePopup';
 import Login from './Login';
+import Register from './Register';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 function App() {
@@ -113,8 +114,11 @@ function App() {
         <Header />
         <Router>
           <Switch>
-            <Route path='/signin'>
+            <Route path='/login'>
               <Login />
+            </Route>
+            <Route path='/register'>
+              <Register />
             </Route>
             <Route path='/'>
               <EditAvatarPopup

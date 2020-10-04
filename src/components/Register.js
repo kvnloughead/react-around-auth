@@ -13,6 +13,8 @@ class Login extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+  // TODO -- needs register logic
+  
   handleChange(e) {
     const { name, value } = e.target;
     this.setState({
@@ -30,7 +32,7 @@ class Login extends React.Component {
         if (data.jwt) {
           this.setState({ email: '', password: '' }, () => {
             this.props.handleLogin();
-            this.props.history.push('/ducks');
+            this.props.history.push('/login');
           });
         }
       })
@@ -40,7 +42,7 @@ class Login extends React.Component {
   render() {
     return (
       <div className='login'>
-        <h2 className='login__title'>Log in</h2>
+        <h2 className='login__title'>Sign up</h2>
         <form onSubmit={this.handleSubmit} className='login__form'>
           <label for='email'>email:</label>
           <input
@@ -62,16 +64,14 @@ class Login extends React.Component {
             value={this.state.password}
             onChange={this.handleChange}
           />
-          <div className='login__link-container'>
-            <Link to='/signin' className='login__link'>
-              Log in
-            </Link>
-          </div>
-          <p class='login__call-out'>Not a member yet? Sign up here!</p>
+          <Link to='/signup' className='login__link'>
+            Sign up
+          </Link>
+          <p class='login__call-out'>Already a member? Log in here!</p>
         </form>
         <div className='login__signup-button-container'>
           <button type='submit' className='login__signup'>
-            Sign up
+            Log in
           </button>
         </div>
       </div>

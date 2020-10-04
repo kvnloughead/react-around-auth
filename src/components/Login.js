@@ -30,7 +30,7 @@ class Login extends React.Component {
         if (data.jwt) {
           this.setState({ email: '', password: '' }, () => {
             this.props.handleLogin();
-            this.props.history.push('/ducks');
+            this.props.history.push('/signin');
           });
         }
       })
@@ -62,11 +62,9 @@ class Login extends React.Component {
             value={this.state.password}
             onChange={this.handleChange}
           />
-          <div className='login__link-container'>
-            <Link to='/signin' className='login__link'>
-              Log in
-            </Link>
-          </div>
+          <Link to='/' className='login__link'>
+            Log in
+          </Link>
           <p class='login__call-out'>Not a member yet? Sign up here!</p>
         </form>
         <div className='login__signup-button-container'>
