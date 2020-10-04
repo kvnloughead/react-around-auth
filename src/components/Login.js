@@ -1,7 +1,8 @@
 import React from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import api from '../utils/Api';
 import '../blocks/login/login.css';
+import AuthorizeUser from './AuthorizeUser';
 
 class Login extends React.Component {
   constructor(props) {
@@ -39,40 +40,7 @@ class Login extends React.Component {
 
   render() {
     return (
-      <div className='login'>
-        <h2 className='login__title'>Log in</h2>
-        <form onSubmit={this.handleSubmit} className='login__form'>
-          <label for='email'>email:</label>
-          <input
-            class='login__input'
-            id='email'
-            required
-            name='email'
-            type='email'
-            defaultValue={this.state.email}
-            onChange={this.handleChange}
-          />
-          <label for='password'>Password:</label>
-          <input
-            class='login__input'
-            id='password'
-            required
-            name='password'
-            type='password'
-            value={this.state.password}
-            onChange={this.handleChange}
-          />
-          <Link to='/' className='login__link'>
-            Log in
-          </Link>
-          <p class='login__call-out'>Not a member yet? Sign up here!</p>
-        </form>
-        <div className='login__signup-button-container'>
-          <button type='submit' className='login__signup'>
-            Sign up
-          </button>
-        </div>
-      </div>
+      <AuthorizeUser title='Log in' handleChange={this.handleChange} handleSubmit={this.handleSubmit} text='Not a member yet? Sign up here!'/>
     );
   }
 }
