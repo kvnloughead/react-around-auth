@@ -10,7 +10,9 @@ import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from './AddPlacePopup';
 import Login from './Login';
 import Register from './Register';
+import InfoToolTip from './InfoToolTip';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
+
 
 function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(
@@ -20,6 +22,7 @@ function App() {
     false
   );
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
+  const [isInfoToolTipOpen, setIsInfoToolTipOpen] = React.useState(false);
   const [cards, setCards] = React.useState([]);
   const [selectedCard, setSelectedCard] = React.useState(null);
   const [currentUser, setCurrentUser] = React.useState(null);
@@ -121,6 +124,7 @@ function App() {
             </Route>
             <Route path='/signup'>
               <Register />
+              <InfoToolTip isOpen={isInfoToolTipOpen} onClose={closeAllPopups} loggedIn={loggedIn}/>
             </Route>
             <Route path='/'>
               <EditAvatarPopup
@@ -149,19 +153,6 @@ function App() {
                 isEditAvatarPopupOpen={isEditAvatarPopupOpen}
                 cards={cards}
                 selectedCard={selectedCard} />
-              {/* <Main
-                onCloseButtons={closeAllPopups}
-                onEditProfile={handleEditProfileClick}
-                onAddPlace={handleAddPlaceClick}
-                onEditAvatar={handleEditAvatarClick}
-                onCardClick={handleCardClick}
-                onCardLike={handleCardLike}
-                onCardDelete={handleCardDelete}
-                isAddPlacePopupOpen={isAddPlacePopupOpen}
-                isEditAvatarPopupOpen={isEditAvatarPopupOpen}
-                cards={cards}
-                selectedCard={selectedCard}
-              /> */}
               <Footer />
             </Route>
           </Switch>

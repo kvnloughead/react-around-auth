@@ -14,30 +14,30 @@ class Login extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-  // TODO -- needs register logic
-  
   handleChange(e) {
-    const { name, value } = e.target;
+    const {name, value} = e.target;
     this.setState({
-      [name]: value,
+      [name]: value 
     });
   }
-  handleSubmit(e) {
+  handleSubmit(e){
     e.preventDefault();
-    if (!this.state.email || !this.state.password) {
-      return;
-    }
-    api
-      .authorize(this.state.email, this.state.password)
-      .then((data) => {
-        if (data.jwt) {
-          this.setState({ email: '', password: '' }, () => {
-            this.props.handleLogin();
+    if (this.state.password === this.state.confirmPassword){
+      let { email, password } = this.state;
+      api.register(email, password).then((res) => {
+        if(res){
+          this.setState({
+            message: ''
+          }, () => {
             this.props.history.push('/login');
-          });
+          })
+        } else {
+          this.setState({
+            message: 'Something went wrong!'
+          })
         }
-      })
-      .catch((err) => console.log(err));
+      });
+    }
   }
 
   render() {
