@@ -36,18 +36,23 @@ class AuthorizeUser extends React.Component {
             value={this.state.password}
             onChange={this.props.handleChange}
           />
-          <Link to={`/${this.props.title === 'Sign up' ? 'signup' : 'signin'}`}className='login__link'>
+          <Link
+            to={`/${this.props.title === 'Sign up' ? 'signup' : 'signin'}`}
+            className='login__link'
+          >
             {this.props.title}
           </Link>
           <Link to={`/${this.props.title === 'Sign up' ? 'signin' : 'signup'}`}>
             <p className='login__call-out'>{this.props.text}</p>
           </Link>
         </form>
-        <Link to={`/${this.props.title === 'Sign up' ? 'signin' : 'signup'}`}>
-          <p className='login__signup'>
-            {this.props.title === 'Sign up' ? 'Log in' : 'Sign up'}
-          </p>
-        </Link>
+        {this.props.loggedIn || (
+          <Link to={`/${this.props.title === 'Sign up' ? 'signin' : 'signup'}`}>
+            <p className='login__signup'>
+              {this.props.title === 'Sign up' ? 'Log in' : 'Sign up'}
+            </p>
+          </Link> 
+        )}
       </div>
     );
   }

@@ -26,7 +26,8 @@ function App() {
   const [cards, setCards] = React.useState([]);
   const [selectedCard, setSelectedCard] = React.useState(null);
   const [currentUser, setCurrentUser] = React.useState(null);
-  const [loggedIn, setLoggedIn] = React.useState(false);
+  const [loggedIn, setLoggedIn] = React.useState(true);
+  const [email, setEmail] = React.useState('email@mail.com');
 
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);
@@ -116,8 +117,8 @@ function App() {
   return (
     <>
       <CurrentUserContext.Provider value={currentUser}>
-        <Header />
         <Router>
+        <Header email={email} loggedIn={loggedIn}/>
           <Switch>
             <Route path='/signin'>
               <Login />
@@ -152,7 +153,8 @@ function App() {
                 isAddPlacePopupOpen={isAddPlacePopupOpen}
                 isEditAvatarPopupOpen={isEditAvatarPopupOpen}
                 cards={cards}
-                selectedCard={selectedCard} />
+                selectedCard={selectedCard}
+                />
               <Footer />
             </Route>
           </Switch>
