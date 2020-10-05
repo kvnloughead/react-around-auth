@@ -22,7 +22,7 @@ function App() {
     false
   );
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
-  const [isInfoToolTipOpen, setIsInfoToolTipOpen] = React.useState(false);
+  const [isInfoToolTipOpen, setIsInfoToolTipOpen] = React.useState(true);
   const [cards, setCards] = React.useState([]);
   const [selectedCard, setSelectedCard] = React.useState(null);
   const [currentUser, setCurrentUser] = React.useState(null);
@@ -89,6 +89,7 @@ function App() {
     setIsAddPlacePopupOpen(false);
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false);
+    setIsInfoToolTipOpen(false);
     setSelectedCard(null);
   }
 

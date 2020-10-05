@@ -1,15 +1,8 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
-import '../blocks/login/login.css';
+import '../blocks/splash-page/splash-page.css';
 
 class AuthorizeUser extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      email: 'Email',
-      password: 'Password',
-    };
-  }
 
   render() {
     return (
@@ -23,7 +16,8 @@ class AuthorizeUser extends React.Component {
             required
             name='email'
             type='email'
-            defaultValue={this.state.email}
+            placeholder='Email'
+            value={this.props.email}
             onChange={this.props.handleChange}
           />
           <label for='password'>Password:</label>
@@ -33,7 +27,8 @@ class AuthorizeUser extends React.Component {
             required
             name='password'
             type='password'
-            value={this.state.password}
+            placeholder='Password'
+            value={this.props.password}
             onChange={this.props.handleChange}
           />
           <Link

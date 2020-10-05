@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import api from '../utils/Api';
-import '../blocks/login/login.css';
+import '../blocks/splash-page/splash-page.css';
 import AuthorizeUser from './AuthorizeUser';
 
 class Login extends React.Component {

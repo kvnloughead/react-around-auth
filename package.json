@@ -2,7 +2,7 @@
   "name": "around-app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://kvnloughead.github.io/around-react",
+  "homepage": "http://kvnloughead.github.io/",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
@@ -33,5 +33,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "path": "^0.12.7"
   }
 }

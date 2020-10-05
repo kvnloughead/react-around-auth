@@ -9,4 +9,5 @@
 @import url('./blocks/footer/footer.css');
 @import url('./blocks/popup/popup.css');
 @import url('./blocks/button/_action/button_action_delete.css');
-@import url('./blocks/login/login.css');
+@import url('./blocks/splash-page/splash-page.css');
+@import url('./blocks/button/_hidden/button_hidden.css');
