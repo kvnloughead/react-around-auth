@@ -1,5 +1,5 @@
 import React from 'react';
-import HeaderLinks from './HeaderLinks.js'
+import HeaderLink from './HeaderLinks.js'
 import headerLogo from '../images/icons/header-logo.svg';
 
 function Header(props) {
@@ -10,7 +10,7 @@ function Header(props) {
         src={headerLogo}
         alt="Around the U.S. Logo"
       />
-      {props.loggedIn && <HeaderLinks email={props.email}/>}
+      <HeaderLink loggedIn={props.loggedIn} email={props.email}/>}
     </header>
   )
 }

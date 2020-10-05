@@ -22,7 +22,7 @@ function App() {
     false
   );
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
-  const [isInfoToolTipOpen, setIsInfoToolTipOpen] = React.useState(true);
+  const [isInfoToolTipOpen, setIsInfoToolTipOpen] = React.useState(false);
   const [cards, setCards] = React.useState([]);
   const [selectedCard, setSelectedCard] = React.useState(null);
   const [currentUser, setCurrentUser] = React.useState(null);
