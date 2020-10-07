@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
-import api from '../utils/Api';
 import '../blocks/splash-page/splash-page.css';
 import PopupWithForm from './PopupWithForm';
+import auth from '../utils/Auth';
 
 class Register extends React.Component {
   constructor(props) {
@@ -23,27 +23,31 @@ class Register extends React.Component {
   }
 
   handleSubmit(e) {
+    debugger;
     e.preventDefault();
-    if (!this.state.email || !this.state.password) {
-      return;
-    }
-    api
-      .authorize(this.state.email, this.state.password)
-      .then((data) => {
-        if (data.jwt) {
-          this.setState({ email: '', password: '' }, () => {
-            this.props.handleLogin();
-            this.props.history.push('/signin');
-          });
+    let { email, password } = this.state;
+    auth.register(email, password)
+      .then((res) => {
+        debugger;
+        if (res.ok) {
+          this.props.setEmail(email);
+          this.props.setPassword(password);
+          this.props.handleLogin();
+          this.props.handleToolTip();
+          this.props.history.push('/');
+        } else {
+          this.props.handleToolTip();
+          Promise.reject(`${res.status} - one of the fields filled in incorrectly`);          
         }
-      })
-      .catch((err) => console.log(err));
+      })    
+    
+    .catch((err) => console.log("Error caught", err));
   }
 
   render() {
     return (
       <>
-        <Link className='splash-page__call-out' to='\signin'>
+        <Link className='splash-page__call-out' to='/signin'>
           Log in
         </Link>
         <PopupWithForm

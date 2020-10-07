@@ -1,9 +1,8 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
-import api from '../utils/Api';
 import '../blocks/splash-page/splash-page.css';
 import PopupWithForm from './PopupWithForm';
-import AuthorizeUser from './AuthorizeUser';
+import auth from '../utils/Auth';
 
 class Login extends React.Component {
   constructor(props) {
@@ -28,7 +27,7 @@ class Login extends React.Component {
     if (!this.state.email || !this.state.password) {
       return;
     }
-    api
+    auth
       .authorize(this.state.email, this.state.password)
       .then((data) => {
         if (data.jwt) {
@@ -44,7 +43,7 @@ class Login extends React.Component {
   render() {
     return (
       <>
-        <Link className='splash-page__call-out' to='signup'>
+        <Link className='splash-page__call-out' to='/signup'>
           Sign up
         </Link>
         <PopupWithForm

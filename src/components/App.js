@@ -1,10 +1,16 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  useHistory,
+} from 'react-router-dom';
 import Header from './Header';
 import ProtectedRoute from './ProtectedRoute';
 import Main from './Main';
 import Footer from './Footer';
 import api from '../utils/Api';
+import auth from '../utils/Auth';
 import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from './AddPlacePopup';
@@ -13,8 +19,8 @@ import Register from './Register';
 import InfoToolTip from './InfoToolTip';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
-
 function App() {
+  const history = useHistory();
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(
     false
   );
@@ -26,8 +32,9 @@ function App() {
   const [cards, setCards] = React.useState([]);
   const [selectedCard, setSelectedCard] = React.useState(null);
   const [currentUser, setCurrentUser] = React.useState(null);
-  const [loggedIn, setLoggedIn] = React.useState(true);
-  const [email, setEmail] = React.useState('email@mail.com');
+  const [loggedIn, setLoggedIn] = React.useState(false);
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
 
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);
@@ -44,6 +51,35 @@ function App() {
   function handleCardClick(card) {
     setSelectedCard(card);
   }
+
+  function handleLogin() {
+    setLoggedIn(true);
+  }
+
+  function handleToolTip() {
+    setIsInfoToolTipOpen(true);
+  }
+
+  // function tokenCheck() {
+  //   // if the user has a token in localStorage,
+  //   // this function will check that the user has a valid token
+  //   const jwt = localStorage.getItem('jwt');
+  //   if (jwt) {
+  //     // we'll verify the token
+  //     auth.getContent(jwt).then((res) => {
+  //       if (res) {
+  //         // log user in and get users data
+  //         // const userData = {
+  //         //   email: res.email
+  //         // }
+  //         // update state
+  //         setLoggedIn(true);
+  //         setEmail(res.email);
+  //         history.push('/');
+  //       }
+  //     });
+  //   }
+  // }
 
   function handleCardLike(card) {
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
@@ -115,18 +151,24 @@ function App() {
       });
   }, []);
 
+  
+
   return (
     <>
       <CurrentUserContext.Provider value={currentUser}>
         <Router>
-        <Header email={email} loggedIn={loggedIn}/>
+          <Header email={email} loggedIn={loggedIn} />
           <Switch>
             <Route path='/signin'>
-              <Login />
+              <Login handleLogin={handleLogin}/>
             </Route>
             <Route path='/signup'>
-              <Register />
-              <InfoToolTip isOpen={isInfoToolTipOpen} onClose={closeAllPopups} loggedIn={loggedIn}/>
+              <Register setEmail={setEmail} setPassword={setPassword} handleLogin={handleLogin} handleToolTip={handleToolTip} />
+              <InfoToolTip
+                isOpen={isInfoToolTipOpen}
+                onClose={closeAllPopups}
+                loggedIn={loggedIn}
+              />
             </Route>
             <Route path='/'>
               <EditAvatarPopup
@@ -144,7 +186,11 @@ function App() {
                 onClose={closeAllPopups}
                 onAddNewCard={handleAddNewCard}
               />
-              <ProtectedRoute path="/" loggedIn={loggedIn} component={Main} onCloseButtons={closeAllPopups}
+              <ProtectedRoute
+                path='/'
+                loggedIn={loggedIn}
+                component={Main}
+                onCloseButtons={closeAllPopups}
                 onEditProfile={handleEditProfileClick}
                 onAddPlace={handleAddPlaceClick}
                 onEditAvatar={handleEditAvatarClick}
@@ -155,7 +201,7 @@ function App() {
                 isEditAvatarPopupOpen={isEditAvatarPopupOpen}
                 cards={cards}
                 selectedCard={selectedCard}
-                />
+              />
               <Footer />
             </Route>
           </Switch>
