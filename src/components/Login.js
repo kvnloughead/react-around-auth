@@ -84,6 +84,9 @@ class Login extends React.Component {
           >
             Log in
           </Link>
+          <Link className='splash-page__text' to='/signup'>
+            Not a member yet? Sign up here!
+          </Link>
         </PopupWithForm>
       </>
     );

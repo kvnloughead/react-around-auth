@@ -10,7 +10,7 @@ function Header(props) {
         src={headerLogo}
         alt="Around the U.S. Logo"
       />
-      <HeaderLink loggedIn={props.loggedIn} email={props.email}/>}
+      <HeaderLink loggedIn={props.loggedIn} email={props.email}/>
     </header>
   )
 }

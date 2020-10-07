@@ -33,15 +33,14 @@ class Register extends React.Component {
           this.props.setEmail(email);
           this.props.setPassword(password);
           this.props.handleLogin();
-          this.props.handleToolTip();
           this.props.history.push('/');
+          this.props.handleToolTip();
         } else {
           this.props.handleToolTip();
-          Promise.reject(`${res.status} - one of the fields filled in incorrectly`);          
+          Promise.reject(`${res.status} - one of the fields was filled in incorrectly`);          
         }
       })    
-    
-    .catch((err) => console.log("Error caught", err));
+    .catch((err) => console.log(err));
   }
 
   render() {
@@ -87,6 +86,9 @@ class Register extends React.Component {
             to='/'
           >
             Sign up
+          </Link>
+          <Link className='splash-page__text' to='/signin'>
+            Already a member? Log in here!
           </Link>
         </PopupWithForm>
       </>

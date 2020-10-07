@@ -4,6 +4,7 @@
 @import url('./__signup/splash-page__signup.css');
 @import url('./__call-out/splash-page__call-out.css');
 @import url('./__title/splash-page__title.css');
+@import url('./__text/splash-page__text.css');
 
 .splash-page {
   height: 100vh;

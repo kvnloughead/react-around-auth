@@ -5,15 +5,15 @@ class HeaderLinks extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: 'email',
-      loggedIn: 'loggedIn'
+      email: '',
+      loggedIn: ''
     };
   }
 
   render() {
     return (
       <>
-        {this.state.loggedIn && (
+        {this.props.loggedIn && (
           <ul className='header__links'>
             <li className='header__email'>{this.props.email}</li>
             <li>

@@ -130,6 +130,10 @@ function App() {
   }
 
   React.useEffect(() => {
+
+  })
+
+  React.useEffect(() => {
     api
       .getUserInfo()
       .then((data) => {
@@ -171,6 +175,11 @@ function App() {
               />
             </Route>
             <Route path='/'>
+              <InfoToolTip
+                isOpen={isInfoToolTipOpen}
+                onClose={closeAllPopups}
+                loggedIn={loggedIn}
+              />
               <EditAvatarPopup
                 isOpen={isEditAvatarPopupOpen}
                 onClose={closeAllPopups}
