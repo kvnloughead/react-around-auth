@@ -1,19 +1,36 @@
 const BASE_URL = 'https://register.nomoreparties.co';
 
 module.exports.register = (email, password) => {
-  debugger;
   return fetch(`${BASE_URL}/signup`, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json',
+      'Acccept': 'application/json',
+      'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ password: password, email: email }),
-  }).then((res) => {
-    debugger;
+    body: JSON.stringify({email, password})
+  })
+  .then((res) => {
+    return res.json();
+  })
+  .then((res) => {
     return res;
-    // return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
-    })
-};
+  })
+  .catch((err) => console.log(err));
+}
+
+// module.exports.register = (email, password) => {
+
+//   return fetch(`${BASE_URL}/signup`, {
+//     method: 'POST',
+//     headers: {
+//       'Content-Type': 'application/json',
+//     },
+//     body: JSON.stringify({ email: email, password: password }),
+//   }).then((res) => {
+//     console.log(res);
+//     return res;
+//     })
+// };
 
 module.exports.authorize = (identifier, password) => {
   return fetch(`${BASE_URL}/signin`, {
@@ -24,20 +41,19 @@ module.exports.authorize = (identifier, password) => {
     },
     body: JSON.stringify({ identifier, password }),
   })
-    .then((response) => {
-      return response.json();
+    .then((res) => {
+      return res.ok ? res.json() : Promise.reject(`${res.status} - Incorrect email address or password`);
     })
     .then((data) => {
-      if (data.jwt) {
+      console.log("data", data)
+      if (data.token) {
         // if user has a token, save it to local storage
-        localStorage.setItem('jwt', data.jwt);
+        localStorage.setItem('token', data.token);
         return data;
       }
     })
     .catch((err) => console.log(err));
 };
-
-// yet another authorization method
 
 module.exports.getContent = (token) => {
   // parameter token -- a json token
@@ -50,6 +66,7 @@ module.exports.getContent = (token) => {
       Authorization: `Bearer ${token}`,
     },
   })
-    .then((res) => res.json())
-    .then((data) => data);
+    .then((res) => res.ok ? res.json() : Promise.reject(`${res.status} - an error has occured`))
+    .then((data) => data)
+    .catch((err) => console.log(err));
 };

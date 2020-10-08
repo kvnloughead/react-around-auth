@@ -1,50 +1,47 @@
-import React from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import '../blocks/splash-page/splash-page.css';
 import PopupWithForm from './PopupWithForm';
 import auth from '../utils/Auth';
 
-class Register extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      email: '',
-      password: '',
-    };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+function Register({ onClose }) {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [message, setMessage] = useState('');
+
+  const history = useHistory();
+
+  const resetForm = () => {
+    setEmail('');
+    setPassword('');
+    setMessage('');
   }
 
-  handleChange(e) {
-    const { name, value } = e.target;
-    this.setState({
-      [name]: value,
-    });
-  }
+  
 
-  handleSubmit(e) {
-    debugger;
+  const handleSubmit = (e) => {
     e.preventDefault();
-    let { email, password } = this.state;
     auth.register(email, password)
       .then((res) => {
-        debugger;
-        if (res.ok) {
-          this.props.setEmail(email);
-          this.props.setPassword(password);
-          this.props.handleLogin();
-          this.props.history.push('/');
-          this.props.handleToolTip();
-        } else {
-          this.props.handleToolTip();
-          Promise.reject(`${res.status} - one of the fields was filled in incorrectly`);          
+        if (!res || res.statusCode === 400) {
+          // TODO improve error handling
+          throw new Error('An error has occured.')
         }
-      })    
-    .catch((err) => console.log(err));
+        return res;
+      })
+      .then(resetForm)
+      .then(() => history.push('/login'))
+      // TODO improve error handling
+      .catch(err => setMessage(err.message));
   }
 
-  render() {
-    return (
+  useEffect(() => {
+    if (localStorage.getItem('token')) { 
+      history.push('/');
+    }
+  }, [history]);
+
+  return (
       <>
         <Link className='splash-page__call-out' to='/signin'>
           Log in
@@ -53,8 +50,8 @@ class Register extends React.Component {
           name='signup'
           title='Sign up'
           isOpen={true}
-          onClose={this.state.onClose}
-          onSubmit={this.handleSubmit}
+          onClose={onClose}
+          onSubmit={handleSubmit}
         >
           <input
             className='splash-page__input'
@@ -65,8 +62,8 @@ class Register extends React.Component {
             minLength='2'
             maxLength='40'
             required
-            value={this.state.email || ''}
-            onChange={this.handleChange}
+            value={email || ''}
+            onChange={e => setEmail(e.target.value)}
           />
           <input
             className='splash-page__input'
@@ -77,12 +74,12 @@ class Register extends React.Component {
             minLength='2'
             maxLength='200'
             required
-            value={this.state.password || ''}
-            onChange={this.handleChange}
+            value={password || ''}
+            onChange={e => setPassword(e.target.value)}
           />
           <Link
             className='splash-page__submit'
-            onClick={this.handleSubmit}
+            onClick={handleSubmit}
             to='/'
           >
             Sign up
@@ -94,6 +91,100 @@ class Register extends React.Component {
       </>
     );
   }
-}
 
-export default withRouter(Register);
+export default Register;
+
+
+
+// class Register extends React.Component {
+//   constructor(props) {
+//     super(props);
+//     this.state = {
+//       email: '',
+//       password: '',
+//     };
+//     this.handleChange = this.handleChange.bind(this);
+//     this.handleSubmit = this.handleSubmit.bind(this);
+//   }
+
+//   handleChange(e) {
+//     const { name, value } = e.target;
+//     this.setState({
+//       [name]: value,
+//     });
+//   }
+
+//   handleSubmit(e) {
+//     e.preventDefault();
+//     let { email, password } = this.state;
+//     auth.register(email, password)
+//       .then((res) => {
+//         console.log("res", res)
+//         if (res.ok) {
+//           this.setState({ email: '', password: ''});
+//           this.props.setUserEmail(email);
+//           this.props.handleLogin();
+//           this.props.history.push('/');
+//           this.props.handleToolTip();
+//         } else {
+//           this.props.handleToolTip();
+//           Promise.reject(`${res.status} - one of the fields was filled in incorrectly`);          
+//         }
+//       })    
+//     .catch((err) => console.log(err));
+//   }
+
+//   render() {
+//     return (
+//       <>
+//         <Link className='splash-page__call-out' to='/signin'>
+//           Log in
+//         </Link>
+//         <PopupWithForm
+//           name='signup'
+//           title='Sign up'
+//           isOpen={true}
+//           onClose={this.state.onClose}
+//           onSubmit={this.handleSubmit}
+//         >
+//           <input
+//             className='splash-page__input'
+//             type='email'
+//             id='email'
+//             name='email'
+//             placeholder='Email'
+//             minLength='2'
+//             maxLength='40'
+//             required
+//             value={this.state.email || ''}
+//             onChange={this.handleChange}
+//           />
+//           <input
+//             className='splash-page__input'
+//             type='password'
+//             id='password'
+//             name='password'
+//             placeholder='Password'
+//             minLength='2'
+//             maxLength='200'
+//             required
+//             value={this.state.password || ''}
+//             onChange={this.handleChange}
+//           />
+//           <Link
+//             className='splash-page__submit'
+//             onClick={this.handleSubmit}
+//             to='/'
+//           >
+//             Sign up
+//           </Link>
+//           <Link className='splash-page__text' to='/signin'>
+//             Already a member? Log in here!
+//           </Link>
+//         </PopupWithForm>
+//       </>
+//     );
+//   }
+// }
+
+// export default withRouter(Register);

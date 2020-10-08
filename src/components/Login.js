@@ -25,18 +25,19 @@ class Login extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     if (!this.state.email || !this.state.password) {
-      return;
+      console.log('400 - one or more of the fields were not provided');
     }
     auth
       .authorize(this.state.email, this.state.password)
       .then((data) => {
-        if (data.jwt) {
-          this.setState({ email: '', password: '' }, () => {
-            this.props.handleLogin();
-            this.props.history.push('/signin');
-          });
+        this.props.handleToolTip();
+        if (data.token) {
+          this.setState({ email: '', password: ''});
+          this.props.handleLogin();
+          this.props.history.push('/');
         }
       })
+        
       .catch((err) => console.log(err));
   }
 

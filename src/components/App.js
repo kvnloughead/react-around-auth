@@ -33,8 +33,7 @@ function App() {
   const [selectedCard, setSelectedCard] = React.useState(null);
   const [currentUser, setCurrentUser] = React.useState(null);
   const [loggedIn, setLoggedIn] = React.useState(false);
-  const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
+  const [userEmail, setUserEmail] = React.useState('');
 
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);
@@ -59,27 +58,6 @@ function App() {
   function handleToolTip() {
     setIsInfoToolTipOpen(true);
   }
-
-  // function tokenCheck() {
-  //   // if the user has a token in localStorage,
-  //   // this function will check that the user has a valid token
-  //   const jwt = localStorage.getItem('jwt');
-  //   if (jwt) {
-  //     // we'll verify the token
-  //     auth.getContent(jwt).then((res) => {
-  //       if (res) {
-  //         // log user in and get users data
-  //         // const userData = {
-  //         //   email: res.email
-  //         // }
-  //         // update state
-  //         setLoggedIn(true);
-  //         setEmail(res.email);
-  //         history.push('/');
-  //       }
-  //     });
-  //   }
-  // }
 
   function handleCardLike(card) {
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
@@ -130,8 +108,16 @@ function App() {
   }
 
   React.useEffect(() => {
-
-  })
+    debugger;
+    const token = localStorage.getItem('token');
+    auth.getContent(token).then((res) => {
+      if (res) {
+        handleLogin();
+        setUserEmail(res.data.email || '');
+      }
+    }).then(() => history &&
+      history.push('/'));
+  }, [history, loggedIn, userEmail]);
 
   React.useEffect(() => {
     api
@@ -161,13 +147,13 @@ function App() {
     <>
       <CurrentUserContext.Provider value={currentUser}>
         <Router>
-          <Header email={email} loggedIn={loggedIn} />
+          <Header userEmail={userEmail} loggedIn={loggedIn} />
           <Switch>
             <Route path='/signin'>
-              <Login handleLogin={handleLogin}/>
+              <Login handleLogin={handleLogin} handleToolTip={handleToolTip}/>
             </Route>
             <Route path='/signup'>
-              <Register setEmail={setEmail} setPassword={setPassword} handleLogin={handleLogin} handleToolTip={handleToolTip} />
+              <Register setUserEmail={setUserEmail} handleLogin={handleLogin} handleToolTip={handleToolTip} />
               <InfoToolTip
                 isOpen={isInfoToolTipOpen}
                 onClose={closeAllPopups}

@@ -3,5 +3,5 @@
   list-style: none;
   margin-bottom: 46px;
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
 }
