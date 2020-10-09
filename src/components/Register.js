@@ -4,20 +4,16 @@ import '../blocks/splash-page/splash-page.css';
 import PopupWithForm from './PopupWithForm';
 import auth from '../utils/Auth';
 
-function Register({ onClose }) {
+function Register({ handleToolTip, onClose }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [message, setMessage] = useState('');
 
   const history = useHistory();
 
   const resetForm = () => {
     setEmail('');
     setPassword('');
-    setMessage('');
   }
-
-  
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -25,18 +21,19 @@ function Register({ onClose }) {
       .then((res) => {
         if (!res || res.statusCode === 400) {
           // TODO improve error handling
-          throw new Error('An error has occured.')
+          throw new Error('400 - one of the fields was filled in incorrectly')
         }
         return res;
       })
       .then(resetForm)
       .then(() => history.push('/login'))
       // TODO improve error handling
-      .catch(err => setMessage(err.message));
+      .catch(err => console.log(err));
   }
 
   useEffect(() => {
     if (localStorage.getItem('token')) { 
+      console.log(localStorage.getItem('token'))
       history.push('/');
     }
   }, [history]);

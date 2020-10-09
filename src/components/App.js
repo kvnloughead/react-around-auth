@@ -3,10 +3,10 @@ import {
   BrowserRouter as Router,
   Route,
   Switch,
-  useHistory,
+  useHistory
 } from 'react-router-dom';
 import Header from './Header';
-import ProtectedRoute from './ProtectedRoute';
+import ProtectedRoute from './ProtectedRoute';  
 import Main from './Main';
 import Footer from './Footer';
 import api from '../utils/Api';
@@ -20,7 +20,7 @@ import InfoToolTip from './InfoToolTip';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 function App() {
-  const history = useHistory();
+
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(
     false
   );
@@ -33,7 +33,9 @@ function App() {
   const [selectedCard, setSelectedCard] = React.useState(null);
   const [currentUser, setCurrentUser] = React.useState(null);
   const [loggedIn, setLoggedIn] = React.useState(false);
-  const [userEmail, setUserEmail] = React.useState('');
+  const [userEmail, setUserEmail] = React.useState(false);
+
+  const history = useHistory();
 
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);
@@ -52,6 +54,7 @@ function App() {
   }
 
   function handleLogin() {
+    debugger;
     setLoggedIn(true);
   }
 
@@ -107,17 +110,27 @@ function App() {
     setSelectedCard(null);
   }
 
-  React.useEffect(() => {
-    debugger;
-    const token = localStorage.getItem('token');
-    auth.getContent(token).then((res) => {
-      if (res) {
-        handleLogin();
-        setUserEmail(res.data.email || '');
-      }
-    }).then(() => history &&
-      history.push('/'));
-  }, [history, loggedIn, userEmail]);
+  // React.useEffect(() => {
+  //   let token = localStorage.getItem('token');
+  //   console.log("Logging token", token)
+  //   // debugger;
+  //   if (token) {
+  //     auth.getContent(token).then((res) => {
+  //       setLoggedIn(true);
+  //       setUserEmail(res.email);        
+  //       history.push('/');
+  //     });
+  //   } else {
+  //     setLoggedIn(false);
+  //   }
+  // }, [history, loggedIn]);
+
+  const onSignOut = () => {
+    // debugger;
+    // localStorage.removeItem('token');
+    // setLoggedIn(false);
+    // history.push('/signin');
+  };
 
   React.useEffect(() => {
     api
@@ -134,26 +147,29 @@ function App() {
     api
       .getCardList()
       .then((data) => {
-        setCards((cards) => [...cards, ...data]);
+        if (data) {
+          setCards((cards) => [...cards, ...data]);
+        }
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
 
-  
-
   return (
-    <>
       <CurrentUserContext.Provider value={currentUser}>
         <Router>
-          <Header userEmail={userEmail} loggedIn={loggedIn} />
+          <Header userEmail={userEmail} loggedIn={loggedIn} handleSignOut={onSignOut} />
           <Switch>
-            <Route path='/signin'>
-              <Login handleLogin={handleLogin} handleToolTip={handleToolTip}/>
+            <Route exact path='/signin'>
+              <Login handleLogin={handleLogin} handleToolTip={handleToolTip} />
             </Route>
-            <Route path='/signup'>
-              <Register setUserEmail={setUserEmail} handleLogin={handleLogin} handleToolTip={handleToolTip} />
+            <Route exact path='/signup'>
+              <Register
+                setUserEmail={setUserEmail}
+                handleLogin={handleLogin}
+                handleToolTip={handleToolTip}
+              />
               <InfoToolTip
                 isOpen={isInfoToolTipOpen}
                 onClose={closeAllPopups}
@@ -202,7 +218,6 @@ function App() {
           </Switch>
         </Router>
       </CurrentUserContext.Provider>
-    </>
   );
 }
 

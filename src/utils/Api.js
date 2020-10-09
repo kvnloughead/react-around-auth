@@ -5,6 +5,7 @@ class Api {
   }
 
   getCardList() {
+    
     return fetch(this.baseUrl + "/cards", {
       headers: this.headers,
     }).then((res) => {
@@ -12,6 +13,7 @@ class Api {
         return res.json();
       }
     });
+
   }
 
   getUserInfo() {
