@@ -3,7 +3,8 @@ import {
   BrowserRouter as Router,
   Route,
   Switch,
-  useHistory
+  useHistory,
+  useLocation
 } from 'react-router-dom';
 import Header from './Header';
 import ProtectedRoute from './ProtectedRoute';  
@@ -36,6 +37,7 @@ function App() {
   const [userEmail, setUserEmail] = React.useState(false);
 
   const history = useHistory();
+  let location = useLocation();
 
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);
@@ -112,20 +114,24 @@ function App() {
 
   React.useEffect(() => {
     let token = localStorage.getItem('token');
-    console.log("Logging token", token)
     if (token) {
       debugger;
       auth.getContent(token).then((res) => {
-        debugger;
-        console.log('res', res)
         setLoggedIn(true);
         setUserEmail(res.data.email); 
-        history.push('/');
       });
     } else {
       setLoggedIn(false);
     }
-  }, [history, loggedIn, userEmail]);
+  }, [loggedIn, userEmail]);
+
+  // React.useEffect(() => {
+  //   console.log(location.pathname)
+  //   if (loggedIn && location.pathname.match(/sign(in|up)$/)) {
+  //     console.log(location.pathname)
+  //     history.push('/around');
+  //   }
+  // })
 
   const onSignOut = () => {
     debugger;
@@ -179,7 +185,7 @@ function App() {
                 loggedIn={loggedIn}
               />
             </Route>
-            <Route path='/'>
+            <Route path='/around'>
               <InfoToolTip
                 isOpen={isInfoToolTipOpen}
                 onClose={closeAllPopups}
@@ -201,7 +207,7 @@ function App() {
                 onAddNewCard={handleAddNewCard}
               />
               <ProtectedRoute
-                path='/'
+                path='/around'
                 loggedIn={loggedIn}
                 component={Main}
                 onCloseButtons={closeAllPopups}

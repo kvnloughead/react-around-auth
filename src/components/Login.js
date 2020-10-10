@@ -6,6 +6,7 @@ import auth from '../utils/Auth';
 
 function Login({ loggedIn, handleLogin, handleToolTip, onClose }) {
   const history = useHistory();
+  // let location = useLocation();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -38,10 +39,16 @@ function Login({ loggedIn, handleLogin, handleToolTip, onClose }) {
         resetForm();
       })
       .then(() => {
-        history.push('/');
+        history.push('/around');
       })
       .catch((err) => console.log(err.message));
   };
+
+  React.useEffect(() => {
+    if (loggedIn) {      
+      history.push('/around');
+    }
+  })
 
   return (
     <>
@@ -81,7 +88,7 @@ function Login({ loggedIn, handleLogin, handleToolTip, onClose }) {
               value={password || ''}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <Link className='splash-page__submit' onClick={handleSubmit} to='/'>
+            <Link className='splash-page__submit' onClick={handleSubmit} to='/around'>
               Log in
             </Link>
             <Link className='splash-page__text' to='/signup'>

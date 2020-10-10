@@ -35,7 +35,7 @@ function Register({ handleToolTip, onClose }) {
   useEffect(() => {
     if (localStorage.getItem('token')) { 
       console.log(localStorage.getItem('token'))
-      history.push('/');
+      history.push('/around');
     }
   }, [history]);
 
@@ -78,7 +78,7 @@ function Register({ handleToolTip, onClose }) {
           <Link
             className='splash-page__submit'
             onClick={handleSubmit}
-            to='/'
+            to='/around'
           >
             Sign up
           </Link>
