@@ -19,6 +19,7 @@ function Register({ handleToolTip, onClose }) {
     e.preventDefault();
     auth.register(email, password)
       .then((res) => {
+        debugger;
         if (!res || res.statusCode === 400) {
           // TODO improve error handling
           throw new Error('400 - one of the fields was filled in incorrectly')

@@ -110,26 +110,28 @@ function App() {
     setSelectedCard(null);
   }
 
-  // React.useEffect(() => {
-  //   let token = localStorage.getItem('token');
-  //   console.log("Logging token", token)
-  //   // debugger;
-  //   if (token) {
-  //     auth.getContent(token).then((res) => {
-  //       setLoggedIn(true);
-  //       setUserEmail(res.email);        
-  //       history.push('/');
-  //     });
-  //   } else {
-  //     setLoggedIn(false);
-  //   }
-  // }, [history, loggedIn]);
+  React.useEffect(() => {
+    let token = localStorage.getItem('token');
+    console.log("Logging token", token)
+    // debugger;    
+    if (token) {
+      debugger;
+      auth.getContent(token).then((res) => {
+        setLoggedIn(true);
+        setUserEmail(res.email);        
+        history.push('/');
+      });
+    } else {
+      setLoggedIn(false);
+    }
+  }, [history, loggedIn]);
 
   const onSignOut = () => {
-    // debugger;
-    // localStorage.removeItem('token');
-    // setLoggedIn(false);
-    // history.push('/signin');
+    debugger;
+    localStorage.removeItem('token');
+    console.log(localStorage)
+    setLoggedIn(false);
+    history.push('/signin');
   };
 
   React.useEffect(() => {

@@ -10,9 +10,11 @@ module.exports.register = (email, password) => {
     body: JSON.stringify({email, password})
   })
   .then((res) => {
+    debugger;
     return res.json();
   })
   .then((res) => {
+    debugger;
     return res;
   })
   .catch((err) => console.log(err));
@@ -25,12 +27,15 @@ module.exports.authorize = (identifier, password) => {
       'Acccept': 'application/json',
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({identifier, password})
+    body: JSON.stringify({email: identifier, password: password})
   })
-  .then(res => res.json())
+  .then((res) => {
+    debugger;
+    return res.json();
+  })
   .then((data) => {
-    console.log("data", data)
-    if (data) {
+    
+    if (!data.message) {
       localStorage.setItem('token', data.token);
       return data;
     } else {
@@ -41,7 +46,7 @@ module.exports.authorize = (identifier, password) => {
 }
 
 module.exports.getContent = (token) => {
-  return fetch(`${BASE_URL}/user/me`, {
+  return fetch(`${BASE_URL}/users/me`, {
     method: 'GET', 
     headers: {
       'Accept': 'application/json',
@@ -49,8 +54,17 @@ module.exports.getContent = (token) => {
       'Authorization': `Bearer ${token}`,
     }
   })
-  .then(res => res.json())
-  .then(data => data)
+  // .then((res) => { 
+  //   debugger;
+  //   return res.json()})
+  // .then((data) => { 
+  //   debugger;
+  //   return data })
+  .then((res)=>{
+    return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
+})
+.then((data)=>data)
+.catch((err)=>console.log(err));
 }
 
 // module.exports.register = (email, password) => {

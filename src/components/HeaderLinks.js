@@ -17,7 +17,7 @@ class HeaderLinks extends React.Component {
           <ul className='header__links'>
             <li className='header__email'>{this.props.email}</li>
             <li>
-              <Link className='header__link' onClick={this.props.onSignOut} to='/signin'>
+              <Link className='header__link' onClick={this.props.handleSignOut} to='/signin'>
                 Log out
               </Link>
             </li>

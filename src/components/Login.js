@@ -24,18 +24,19 @@ function Login({ handleLogin, handleToolTip, onClose }) {
       // TODO handle error
       console.log('400 - one or more of the fields were not provided');
     }
-
+    console.log(email, password)
     auth.authorize(email, password)
       .then((data) => {
+        debugger;
         if (!data) {
           throw new Error('401 - the user with the specified email not found');
         }
-        if (data.jwt) {
+        if (data.token) {
           handleLogin();
         }
       })
-      .then(resetForm)
-      .then(history.push('/'))
+      .then(() => {resetForm()})
+      .then(() => {history.push('/')})
       .catch(err => console.log(err.message));
   } 
 
