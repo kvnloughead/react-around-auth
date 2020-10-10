@@ -2,7 +2,7 @@ import React from 'react';
 import HeaderLink from './HeaderLinks.js'
 import headerLogo from '../images/icons/header-logo.svg';
 
-function Header(props) {
+function Header({ userEmail, loggedIn, handleSignOut }) {
   return (
     <header className="header">
       <img
@@ -10,7 +10,7 @@ function Header(props) {
         src={headerLogo}
         alt="Around the U.S. Logo"
       />
-      <HeaderLink loggedIn={props.loggedIn} email={props.email} handleSignOut={props.handleSignOut}/>
+      <HeaderLink loggedIn={loggedIn} userEmail={userEmail} handleSignOut={handleSignOut}/>
     </header>
   )
 }

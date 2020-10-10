@@ -113,18 +113,19 @@ function App() {
   React.useEffect(() => {
     let token = localStorage.getItem('token');
     console.log("Logging token", token)
-    // debugger;    
     if (token) {
       debugger;
       auth.getContent(token).then((res) => {
+        debugger;
+        console.log('res', res)
         setLoggedIn(true);
-        setUserEmail(res.email);        
+        setUserEmail(res.data.email); 
         history.push('/');
       });
     } else {
       setLoggedIn(false);
     }
-  }, [history, loggedIn]);
+  }, [history, loggedIn, userEmail]);
 
   const onSignOut = () => {
     debugger;
@@ -164,7 +165,7 @@ function App() {
           <Header userEmail={userEmail} loggedIn={loggedIn} handleSignOut={onSignOut} />
           <Switch>
             <Route exact path='/signin'>
-              <Login handleLogin={handleLogin} handleToolTip={handleToolTip} />
+              <Login loggedIn={loggedIn} handleLogin={handleLogin} handleToolTip={handleToolTip} />
             </Route>
             <Route exact path='/signup'>
               <Register
