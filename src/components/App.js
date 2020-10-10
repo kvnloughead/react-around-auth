@@ -4,7 +4,8 @@ import {
   Route,
   Switch,
   useHistory,
-  useLocation
+  useLocation,
+  Redirect
 } from 'react-router-dom';
 import Header from './Header';
 import ProtectedRoute from './ProtectedRoute';  
@@ -125,14 +126,6 @@ function App() {
     }
   }, [loggedIn, userEmail]);
 
-  // React.useEffect(() => {
-  //   console.log(location.pathname)
-  //   if (loggedIn && location.pathname.match(/sign(in|up)$/)) {
-  //     console.log(location.pathname)
-  //     history.push('/around');
-  //   }
-  // })
-
   const onSignOut = () => {
     debugger;
     localStorage.removeItem('token');
@@ -184,6 +177,9 @@ function App() {
                 onClose={closeAllPopups}
                 loggedIn={loggedIn}
               />
+            </Route>
+            <Route exact path='/'>
+              {loggedIn ? <Redirect to="/around" /> : <Redirect to="/signin" />}
             </Route>
             <Route path='/around'>
               <InfoToolTip
