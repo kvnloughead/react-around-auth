@@ -19,17 +19,28 @@ function Register({ handleToolTip, onClose }) {
     e.preventDefault();
     auth.register(email, password)
       .then((res) => {
-        debugger;
-        if (!res || res.statusCode === 400) {
+        //debugger;
+        console.log(res)
+        if (!res.data) {
+          handleToolTip();
           // TODO improve error handling
-          throw new Error('400 - one of the fields was filled in incorrectly')
+          throw new Error(`400 - ${res.message ? res.message : res.error}`);
         }
+        history.push('/signin');
+        handleToolTip();
         return res;
       })
       .then(resetForm)
-      .then(() => history.push('/login'))
+      // .then((res) => {
+      //   console.log(res)
+      //   history.push('/signin');
+      //   handleToolTip();
+      // })
       // TODO improve error handling
-      .catch(err => console.log(err));
+      .catch(err => {
+        //debugger;
+        console.log(err)
+      });
   }
 
   useEffect(() => {

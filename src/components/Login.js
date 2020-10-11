@@ -27,7 +27,7 @@ function Login({ loggedIn, handleLogin, handleToolTip, onClose }) {
     auth
       .authorize(email, password)
       .then((data) => {
-        debugger;
+        //debugger;
         if (!data) {
           throw new Error('401 - the user with the specified email not found');
         }

@@ -57,7 +57,7 @@ function App() {
   }
 
   function handleLogin() {
-    debugger;
+    //debugger;
     setLoggedIn(true);
   }
 
@@ -116,7 +116,7 @@ function App() {
   React.useEffect(() => {
     let token = localStorage.getItem('token');
     if (token) {
-      debugger;
+      //debugger;
       auth.getContent(token).then((res) => {
         setLoggedIn(true);
         setUserEmail(res.data.email); 
@@ -127,7 +127,7 @@ function App() {
   }, [loggedIn, userEmail]);
 
   const onSignOut = () => {
-    debugger;
+    //debugger;
     localStorage.removeItem('token');
     console.log(localStorage)
     setLoggedIn(false);
