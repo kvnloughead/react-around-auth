@@ -75,6 +75,7 @@ function Login({ loggedIn, handleLogin, handleToolTip, onClose }) {
               required
               value={email || ''}
               onChange={(e) => setEmail(e.target.value)}
+              autocomplete="on"
             />
             <input
               className='splash-page__input'
@@ -87,6 +88,7 @@ function Login({ loggedIn, handleLogin, handleToolTip, onClose }) {
               required
               value={password || ''}
               onChange={(e) => setPassword(e.target.value)}
+              autocomplete="on"
             />
             <Link className='splash-page__submit' onClick={handleSubmit} to='/around'>
               Log in

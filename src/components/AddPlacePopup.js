@@ -38,6 +38,7 @@ function AddPlacePopup(props) {
         maxLength="30"
         required
         onChange={handleTitleChange}
+        autocomplete="on"
       />
       <span className="popup__input-error" id="title-input-error"></span>
       <input
@@ -48,6 +49,7 @@ function AddPlacePopup(props) {
         placeholder="Image link"
         required
         onChange={handleLinkChange}
+        autocomplete="on"
       />
       <span className="popup__input-error" id="imageUrl-input-error"></span>
       <button

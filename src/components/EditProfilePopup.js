@@ -51,6 +51,7 @@ function EditProfilePopup(props) {
           required
           value={name || ''}
           onChange={handleNameChange}
+          autocomplete="on"
         />
         <span className="popup__input-error" id="name-input-error"></span>
         <input
@@ -64,6 +65,7 @@ function EditProfilePopup(props) {
           required
           value={description || ''}
           onChange={handleDescriptionChange}
+          autocomplete="on"
         />
         <span className="popup__input-error" id="job-input-error"></span>
         <button

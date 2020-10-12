@@ -77,6 +77,7 @@ function Register({ handleToolTip, handleLogin, onClose }) {
             required
             value={email || ''}
             onChange={e => setEmail(e.target.value)}
+            autocomplete="on"
           />
           <input
             className='splash-page__input'
@@ -89,6 +90,7 @@ function Register({ handleToolTip, handleLogin, onClose }) {
             required
             value={password || ''}
             onChange={e => setPassword(e.target.value)}
+            autocomplete="on"
           />
           <Link
             className='splash-page__submit'

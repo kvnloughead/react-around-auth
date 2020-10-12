@@ -19,6 +19,7 @@ class AuthorizeUser extends React.Component {
             placeholder='Email'
             value={this.props.email}
             onChange={this.props.handleChange}
+            autocomplete="on"
           />
           <label for='password'>Password:</label>
           <input
@@ -30,6 +31,7 @@ class AuthorizeUser extends React.Component {
             placeholder='Password'
             value={this.props.password}
             onChange={this.props.handleChange}
+            autocomplete="on"
           />
           <Link
             to={`/${this.props.title === 'Sign up' ? 'signup' : 'signin'}`}
