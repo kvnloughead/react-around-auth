@@ -4,7 +4,7 @@ import '../blocks/splash-page/splash-page.css';
 import PopupWithForm from './PopupWithForm';
 import auth from '../utils/Auth';
 
-function Register({ handleToolTip, onClose }) {
+function Register({ handleToolTip, handleLogin, onClose }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -19,17 +19,21 @@ function Register({ handleToolTip, onClose }) {
     e.preventDefault();
     auth.register(email, password)
       .then((res) => {
-        //debugger;
+        debugger;
         console.log(res)
         if (!res.data) {
-          handleToolTip();
-          // TODO improve error handling
-          throw new Error(`400 - ${res.message ? res.message : res.error}`);
-        }
-        history.push('/signin');
-        handleToolTip();
-        return res;
-      })
+          handleToolTip('failure');
+          throw new Error(`400 - ${res.message ? res.message : res}`);
+        }})
+        .then((res) => {
+          history.push('/signin');
+          return res;
+        })
+        .then((res) => {
+          debugger;
+          handleToolTip('success');
+          return res;
+        })
       .then(resetForm)
       // .then((res) => {
       //   console.log(res)

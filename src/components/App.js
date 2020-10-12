@@ -4,7 +4,6 @@ import {
   Route,
   Switch,
   useHistory,
-  useLocation,
   Redirect
 } from 'react-router-dom';
 import Header from './Header';
@@ -36,9 +35,9 @@ function App() {
   const [currentUser, setCurrentUser] = React.useState(null);
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [userEmail, setUserEmail] = React.useState(false);
+  const [tooltipMode, setTooltipMode] = React.useState(false);
 
   const history = useHistory();
-  let location = useLocation();
 
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);
@@ -57,11 +56,15 @@ function App() {
   }
 
   function handleLogin() {
-    //debugger;
+    debugger;
+    
     setLoggedIn(true);
+
   }
 
-  function handleToolTip() {
+  function handleToolTip(mode) {
+    debugger;
+    setTooltipMode(mode)
     setIsInfoToolTipOpen(true);
   }
 
@@ -165,6 +168,12 @@ function App() {
           <Switch>
             <Route exact path='/signin'>
               <Login loggedIn={loggedIn} handleLogin={handleLogin} handleToolTip={handleToolTip} />
+              <InfoToolTip
+                isOpen={isInfoToolTipOpen}
+                onClose={closeAllPopups}
+                loggedIn={loggedIn}
+                mode={tooltipMode}
+              />
             </Route>
             <Route exact path='/signup'>
               <Register
@@ -176,17 +185,19 @@ function App() {
                 isOpen={isInfoToolTipOpen}
                 onClose={closeAllPopups}
                 loggedIn={loggedIn}
+                mode={tooltipMode}
               />
             </Route>
             <Route exact path='/'>
               {loggedIn ? <Redirect to="/around" /> : <Redirect to="/signin" />}
             </Route>
             <Route path='/around'>
-              <InfoToolTip
+              {/* <InfoToolTip
                 isOpen={isInfoToolTipOpen}
                 onClose={closeAllPopups}
                 loggedIn={loggedIn}
-              />
+                mode={tooltipMode}
+              /> */}
               <EditAvatarPopup
                 isOpen={isEditAvatarPopupOpen}
                 onClose={closeAllPopups}

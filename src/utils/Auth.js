@@ -10,7 +10,7 @@ module.exports.register = (email, password) => {
     body: JSON.stringify({ email, password }),
   })
     .then((res) => {
-      //debugger;
+      debugger;
       console.log(res)
       return res.json();
     })
