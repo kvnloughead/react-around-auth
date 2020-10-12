@@ -56,14 +56,14 @@ function App() {
   }
 
   function handleLogin() {
-    debugger;
+    
     
     setLoggedIn(true);
 
   }
 
   function handleToolTip(mode) {
-    debugger;
+    
     setTooltipMode(mode)
     setIsInfoToolTipOpen(true);
   }
@@ -119,7 +119,7 @@ function App() {
   React.useEffect(() => {
     let token = localStorage.getItem('token');
     if (token) {
-      //debugger;
+      
       auth.getContent(token).then((res) => {
         setLoggedIn(true);
         setUserEmail(res.data.email); 
@@ -130,9 +130,7 @@ function App() {
   }, [loggedIn, userEmail]);
 
   const onSignOut = () => {
-    //debugger;
     localStorage.removeItem('token');
-    console.log(localStorage)
     setLoggedIn(false);
     history.push('/signin');
   };
