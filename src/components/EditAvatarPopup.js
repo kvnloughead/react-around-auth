@@ -30,7 +30,7 @@ function EditAvatarPopup(props) {
           minLength="2"
           required
           ref={avatarRef}
-          autocomplete="on"
+          autoComplete="on"
         />
         <span className="popup__input-error" id="avatar-input-error"></span>
 

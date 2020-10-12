@@ -21,20 +21,18 @@ function Register({ handleToolTip, handleLogin, onClose }) {
       .then((res) => {
         if (!res.data) {
           handleToolTip('failure');
-          throw new Error(`400 - ${res.message ? res.message : res}`);
+          throw new Error(`400 - ${res.message ? res.message : res.error}`);
         }})
         .then((res) => {
           history.push('/signin');
           return res;
         })
         .then((res) => {
-          
           handleToolTip('success');
           return res;
         })
       .then(resetForm)
       .catch(err => {
-        
         console.log(err)
       });
   }
@@ -63,12 +61,10 @@ function Register({ handleToolTip, handleLogin, onClose }) {
             id='email'
             name='email'
             placeholder='Email'
-            minLength='2'
-            maxLength='40'
             required
             value={email || ''}
             onChange={e => setEmail(e.target.value)}
-            autocomplete="on"
+            autoComplete="on"
           />
           <input
             className='splash-page__input'
@@ -81,7 +77,7 @@ function Register({ handleToolTip, handleLogin, onClose }) {
             required
             value={password || ''}
             onChange={e => setPassword(e.target.value)}
-            autocomplete="on"
+            autoComplete="on"
           />
           <Link
             className='splash-page__submit'
