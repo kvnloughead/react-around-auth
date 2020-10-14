@@ -79,13 +79,13 @@ function Register({ handleToolTip, handleLogin, onClose }) {
             onChange={e => setPassword(e.target.value)}
             autoComplete="on"
           />
-          <Link
+          <button
             className='splash-page__submit'
             onClick={handleSubmit}
             to='/around'
           >
             Sign up
-          </Link>
+          </button>
           <Link className='splash-page__text' to='/signin'>
             Already a member? Log in here!
           </Link>

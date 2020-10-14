@@ -84,13 +84,13 @@ function Login({ loggedIn, handleLogin, userEmail, setUserEmail, onClose }) {
           onChange={(e) => setPassword(e.target.value)}
           autoComplete='on'
         />
-        <Link
+        <button
           className='splash-page__submit'
           onClick={handleSubmit}
           to='/around'
         >
           Log in
-        </Link>
+        </button>
         <Link className='splash-page__text' to='/signup'>
           Not a member yet? Sign up here!
         </Link>
