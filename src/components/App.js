@@ -65,10 +65,13 @@ function App() {
 
   function handleCardLike(card) {
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
-    api.updateLikes(card._id, isLiked).then((newCard) => {
-      const newCards = cards.map((c) => (c._id === card._id ? newCard : c));
-      setCards(newCards);
-    });
+    api
+      .updateLikes(card._id, isLiked)
+      .then((newCard) => {
+        const newCards = cards.map((c) => (c._id === card._id ? newCard : c));
+        setCards(newCards);
+      })
+      .catch((err) => console.log(err));
   }
 
   function handleCardDelete(card) {
@@ -83,23 +86,32 @@ function App() {
   }
 
   function handleUpdateUser({ name, about }) {
-    api.setUserInfo({ name, about }).then((data) => {
-      setCurrentUser(data);
-    });
+    api
+      .setUserInfo({ name, about })
+      .then((data) => {
+        setCurrentUser(data);
+      })
+      .catch((err) => console.log(err));
     closeAllPopups();
   }
 
   function handleUpdateAvatar({ avatar }) {
-    api.setAvatar(avatar.current.value).then((data) => {
-      setCurrentUser(data);
-    });
+    api
+      .setAvatar(avatar.current.value)
+      .then((data) => {
+        setCurrentUser(data);
+      })
+      .catch((err) => console.log(err));
     closeAllPopups();
   }
 
   function handleAddNewCard({ title, link }) {
-    api.addNewCard({ title, link }).then((newCard) => {
-      setCards([...cards, newCard]);
-    });
+    api
+      .addNewCard({ title, link })
+      .then((newCard) => {
+        setCards([...cards, newCard]);
+      })
+      .catch((err) => console.log(err));
     closeAllPopups();
   }
 
@@ -112,7 +124,7 @@ function App() {
   }
 
   React.useEffect(() => {
-    let token = localStorage.getItem('token');
+    const token = localStorage.getItem('token');
     if (token) {
       auth
         .getContent(token)
@@ -230,7 +242,7 @@ function App() {
             />
             <Footer />
           </Route>
-          <Redirect from="*" to='/' />
+          <Redirect from='*' to='/' />
         </Switch>
       </Router>
     </CurrentUserContext.Provider>

@@ -13,7 +13,6 @@ class Api {
         return res.json();
       }
     });
-
   }
 
   getUserInfo() {
