@@ -4,7 +4,7 @@ import '../blocks/splash-page/splash-page.css';
 import PopupWithForm from './PopupWithForm';
 import auth from '../utils/Auth';
 
-function Login({ loggedIn, handleLogin, handleToolTip, onClose }) {
+function Login({ loggedIn, handleLogin, userEmail, setUserEmail, onClose }) {
   const history = useHistory();
 
   const [email, setEmail] = useState('');
@@ -42,6 +42,7 @@ function Login({ loggedIn, handleLogin, handleToolTip, onClose }) {
   React.useEffect(() => {
     if (loggedIn) {
       history.push('/around');
+      setUserEmail(email || userEmail);
     }
   });
 

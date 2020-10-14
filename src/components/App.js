@@ -138,7 +138,7 @@ function App() {
     } else {
       setLoggedIn(false);
     }
-  }, [loggedIn, userEmail]);
+  }, []);
 
   const onSignOut = () => {
     localStorage.removeItem('token');
@@ -182,6 +182,8 @@ function App() {
           <Route exact path='/signin'>
             <Login
               loggedIn={loggedIn}
+              userEmail={setUserEmail}
+              setUserEmail={setUserEmail}
               handleLogin={handleLogin}
               handleToolTip={handleToolTip}
             />
