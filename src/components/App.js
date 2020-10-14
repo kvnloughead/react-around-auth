@@ -151,19 +151,16 @@ function App() {
       .getUserInfo()
       .then((data) => {
         setCurrentUser(data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
-
-  React.useEffect(() => {
-    api
-      .getCardList()
-      .then((data) => {
-        if (data) {
-          setCards((cards) => [...cards, ...data]);
-        }
+        api
+          .getCardList()
+          .then((data) => {
+            if (data) {
+              setCards((cards) => [...cards, ...data]);
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       })
       .catch((err) => {
         console.log(err);
