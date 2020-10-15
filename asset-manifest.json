@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/static/css/main.bee97fc3.chunk.css",
+    "main.js": "/static/js/main.af71def7.chunk.js",
+    "main.js.map": "/static/js/main.af71def7.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.335667d2.js",
+    "runtime-main.js.map": "/static/js/runtime-main.335667d2.js.map",
+    "static/js/2.befbe997.chunk.js": "/static/js/2.befbe997.chunk.js",
+    "static/js/2.befbe997.chunk.js.map": "/static/js/2.befbe997.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.8ae29312d847bb053a2dc24200db8c7a.js": "/precache-manifest.8ae29312d847bb053a2dc24200db8c7a.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/main.bee97fc3.chunk.css.map": "/static/css/main.bee97fc3.chunk.css.map",
+    "static/js/2.befbe997.chunk.js.LICENSE.txt": "/static/js/2.befbe997.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/static/media/yosemite.bdf7042b.jpg",
+    "static/media/checkmark.svg": "/static/media/checkmark.75df9ada.svg",
+    "static/media/header-logo.svg": "/static/media/header-logo.71ad3aff.svg",
+    "static/media/redX.svg": "/static/media/redX.db56ee32.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.335667d2.js",
+    "static/js/2.befbe997.chunk.js",
+    "static/css/main.bee97fc3.chunk.css",
+    "static/js/main.af71def7.chunk.js"
+  ]
+}
