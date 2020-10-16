@@ -35,6 +35,14 @@ function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [userEmail, setUserEmail] = React.useState(false);
   const [tooltipMode, setTooltipMode] = React.useState(false);
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
+
+  const resetForm = () => {
+    debugger;
+    setEmail('');
+    setPassword('');
+  };
 
   const history = useHistory();
 
@@ -115,29 +123,55 @@ function App() {
     closeAllPopups();
   }
 
-  // function handleLoginSubmit(e) {
-  //   e.preventDefault();
-  //   auth
-  //     .authorize(email, password)
-  //     .then((data) => {
-  //       if (!email || !password) {
-  //         throw new Error('400 - one or more of the fields were not provided');
-  //       }
-  //       if (!data) {
-  //         throw new Error('401 - the user with the specified email not found');
-  //       }
-  //       if (data.token) {
-  //         handleLogin();
-  //       } 
-  //     })
-  //     .then(() => {
-  //       resetForm();
-  //     })
-  //     .then(() => {
-  //       history.push('/around');
-  //     })
-  //     .catch((err) => console.log(err.message));
-  // };
+  const handleLoginSubmit = (e) => {
+    e.preventDefault();
+    const [email, password] = [e.target.email.value, e.target.password.value];
+    auth
+      .authorize(email, password)
+      .then((data) => {
+        if (data && data.token) {
+          handleLogin();
+        } else {
+          resetForm();
+          if (!email || !password) {
+            throw new Error('400 - one or more of the fields were not provided');
+          }
+          if (!data) {
+            throw new Error('401 - bad email or password');
+          }
+        }
+      })
+      .then(() => {
+        debugger;
+        resetForm();
+      })
+      .then(() => {
+        history.push('/around');
+      })
+      .catch((err) => console.log(err.message));
+  };
+
+    // const handleRegisterSubmit = (e) => {
+    //   e.preventDefault();
+    //   auth.register(email, password)
+    //     .then((res) => {
+    //       if (!res.data) {
+    //         handleToolTip('failure');
+    //         throw new Error(`400 - ${res.message ? res.message : res.error}`);
+    //       }})
+    //       .then((res) => {
+    //         history.push('/signin');
+    //         return res;
+    //       })
+    //       .then((res) => {
+    //         handleToolTip('success');
+    //         return res;
+    //       })
+    //     .then(resetForm)
+    //     .catch(err => {
+    //       console.log(err)
+    //     });
+    // }
 
   function closeAllPopups() {
     setIsAddPlacePopupOpen(false);
@@ -203,9 +237,14 @@ function App() {
           <Route exact path='/signin'>
             <Login
               loggedIn={loggedIn}
+              email={email}
+              setEmail={setEmail}
+              password={password}
+              setPassword={setPassword}
               userEmail={setUserEmail}
               setUserEmail={setUserEmail}
               handleLogin={handleLogin}
+              handleLoginSubmit={handleLoginSubmit}
               handleToolTip={handleToolTip}
             />
             <InfoToolTip
