@@ -37,6 +37,7 @@ function App() {
   const [tooltipMode, setTooltipMode] = React.useState(false);
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
+  const [registered, setRegistered] = React.useState(false)
 
   const resetForm = () => {
     debugger;
@@ -151,27 +152,28 @@ function App() {
       .catch((err) => console.log(err.message));
   };
 
-    // const handleRegisterSubmit = (e) => {
-    //   e.preventDefault();
-    //   auth.register(email, password)
-    //     .then((res) => {
-    //       if (!res.data) {
-    //         handleToolTip('failure');
-    //         throw new Error(`400 - ${res.message ? res.message : res.error}`);
-    //       }})
-    //       .then((res) => {
-    //         history.push('/signin');
-    //         return res;
-    //       })
-    //       .then((res) => {
-    //         handleToolTip('success');
-    //         return res;
-    //       })
-    //     .then(resetForm)
-    //     .catch(err => {
-    //       console.log(err)
-    //     });
-    // }
+    const handleRegisterSubmit = (e) => {
+      e.preventDefault();
+      auth.register(email, password)
+        .then((res) => {
+          if (!res.data) {
+            handleToolTip('failure');
+            throw new Error(`400 - ${res.message ? res.message : res.error}`);
+          }})
+          .then((res) => {
+            setRegistered(true);
+            history.push('/signin');
+            return res;
+          })
+          .then((res) => {
+            handleToolTip('success');
+            return res;
+          })
+        .then(resetForm)
+        .catch(err => {
+          console.log(err)
+        });
+    }
 
   function closeAllPopups() {
     setIsAddPlacePopupOpen(false);
@@ -256,6 +258,12 @@ function App() {
           </Route>
           <Route exact path='/signup'>
             <Register
+              registered={registered}
+              email={email}
+              setEmail={setEmail}
+              password={password}
+              setPassword={setPassword}
+              handleRegisterSubmit={handleRegisterSubmit}
               setUserEmail={setUserEmail}
               handleLogin={handleLogin}
               handleToolTip={handleToolTip}

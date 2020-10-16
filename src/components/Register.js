@@ -4,44 +4,51 @@ import '../blocks/splash-page/splash-page.css';
 import PopupWithForm from './PopupWithForm';
 import auth from '../utils/Auth';
 
-function Register({ handleToolTip, handleLogin, onClose }) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+function Register({ registered, handleRegisterSubmit, email, setEmail, password, setPassword, onClose }) {
+  // const [email, setEmail] = useState('');
+  // const [password, setPassword] = useState('');
 
   const history = useHistory();
 
-  const resetForm = () => {
-    setEmail('');
-    setPassword('');
-  }
+  // const resetForm = () => {
+  //   setEmail('');
+  //   setPassword('');
+  // }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    auth.register(email, password)
-      .then((res) => {
-        if (!res.data) {
-          handleToolTip('failure');
-          throw new Error(`400 - ${res.message ? res.message : res.error}`);
-        }})
-        .then((res) => {
-          history.push('/signin');
-          return res;
-        })
-        .then((res) => {
-          handleToolTip('success');
-          return res;
-        })
-      .then(resetForm)
-      .catch(err => {
-        console.log(err)
-      });
-  }
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   auth.register(email, password)
+  //     .then((res) => {
+  //       if (!res.data) {
+  //         handleToolTip('failure');
+  //         throw new Error(`400 - ${res.message ? res.message : res.error}`);
+  //       }})
+  //       .then((res) => {
+  //         history.push('/signin');
+  //         return res;
+  //       })
+  //       .then((res) => {
+  //         handleToolTip('success');
+  //         return res;
+  //       })
+  //     .then(resetForm)
+  //     .catch(err => {
+  //       console.log(err)
+  //     });
+  // }
 
   useEffect(() => {
     if (localStorage.getItem('token')) { 
       history.push('/around');
     }
   }, [history]);
+
+  useEffect(() => {
+    if (registered) {
+      debugger; 
+      history.push('/signin');
+    }
+  }, [history, registered]);
 
   return (
       <>
@@ -53,7 +60,7 @@ function Register({ handleToolTip, handleLogin, onClose }) {
           title='Sign up'
           isOpen={true}
           onClose={onClose}
-          onSubmit={handleSubmit}
+          onSubmit={handleRegisterSubmit}
         >
           <input
             className='splash-page__input'
@@ -81,7 +88,7 @@ function Register({ handleToolTip, handleLogin, onClose }) {
           />
           <button
             className='splash-page__submit'
-            onClick={handleSubmit}
+            // onClick={handleSubmit}
             to='/around'
           >
             Sign up
