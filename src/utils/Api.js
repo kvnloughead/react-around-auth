@@ -95,9 +95,9 @@ class Api {
 }
 
 const api = new Api({
-  baseUrl: "https://around.nomoreparties.co/v1/group-2",
+  baseUrl: "https://api.kevin.students.nomoreparties.site",
   headers: {
-    authorization: "dc340326-95ec-4474-9060-e6102316f742",
+//    authorization: "dc340326-95ec-4474-9060-e6102316f742",
     "Content-Type": "application/json",
   },
 });
