@@ -34,8 +34,8 @@ function App() {
   const [currentUser, setCurrentUser] = React.useState(null);
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [userEmail, setUserEmail] = React.useState(false);
-  const [tooltipMode, setTooltipMode] = React.useState(false);
   const [email, setEmail] = React.useState('');
+  const [tooltipMode, setTooltipMode] = React.useState(false);
   const [password, setPassword] = React.useState('');
   const [registered, setRegistered] = React.useState(false)
 
@@ -143,7 +143,6 @@ function App() {
         }
       })
       .then(() => {
-        debugger;
         resetForm();
       })
       .then(() => {

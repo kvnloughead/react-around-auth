@@ -1,4 +1,5 @@
-const BASE_URL = 'https://register.nomoreparties.co';
+// const BASE_URL = 'https://register.nomoreparties.co';
+const BASE_URL = 'http://localhost:4000';
 
 module.exports.register = (email, password) => {
   return fetch(`${BASE_URL}/signup`, {
@@ -23,6 +24,7 @@ module.exports.authorize = (identifier, password) => {
     body: JSON.stringify({ email: identifier, password: password }),
   })
     .then((res) => {
+      console.log(res)
       return res.json();
     })
     .then((data) => {
@@ -42,10 +44,14 @@ module.exports.getContent = (token) => {
       Authorization: `Bearer ${token}`,
     },
   }).then((res) => {
+    console.log(res)
     return res.ok
       ? res.json()
       : Promise.reject(`${res.status} - ${res.message}`);
-  });
-  // .then((data) => data)
-  // .catch((err) => console.log(err))
+  })
+  .then((data) => {
+    console.log(data);
+    return data
+  })
+  .catch((err) => console.log(err))
 };

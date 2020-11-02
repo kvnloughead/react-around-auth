@@ -5,7 +5,6 @@ class Api {
   }
 
   getCardList() {
-    
     return fetch(this.baseUrl + "/cards", {
       headers: this.headers,
     }).then((res) => {
@@ -19,6 +18,7 @@ class Api {
     return fetch(this.baseUrl + "/users/me", {
       headers: this.headers,
     }).then((res) => {
+      console.log(res)
       if (res.ok) {
         return res.json();
       }
@@ -95,9 +95,10 @@ class Api {
 }
 
 const api = new Api({
-  baseUrl: "https://around.nomoreparties.co/v1/group-2",
+  // baseUrl: "https://around.nomoreparties.co/v1/group-2",
+  baseUrl: "http://localhost:4000",
   headers: {
-    authorization: "dc340326-95ec-4474-9060-e6102316f742",
+    // authorization: "dc340326-95ec-4474-9060-e6102316f742",  
     "Content-Type": "application/json",
   },
 });
