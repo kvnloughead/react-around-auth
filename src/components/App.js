@@ -37,10 +37,10 @@ function App() {
   const [email, setEmail] = React.useState('');
   const [tooltipMode, setTooltipMode] = React.useState(false);
   const [password, setPassword] = React.useState('');
-  const [registered, setRegistered] = React.useState(false)
+  const [registered, setRegistered] = React.useState(false);
+  const [token, setToken] = React.useState(null);
 
   const resetForm = () => {
-    debugger;
     setEmail('');
     setPassword('');
   };
@@ -75,7 +75,7 @@ function App() {
   function handleCardLike(card) {
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
     api
-      .updateLikes(card._id, isLiked)
+      .updateLikes(card._id, isLiked, token)
       .then((newCard) => {
         const newCards = cards.map((c) => (c._id === card._id ? newCard : c));
         setCards(newCards);
@@ -85,7 +85,7 @@ function App() {
 
   function handleCardDelete(card) {
     api
-      .deleteCard(card._id)
+      .deleteCard(card._id, token)
       .then(() => {
         setCards(cards.filter((c) => c._id !== card._id));
       })
@@ -96,7 +96,7 @@ function App() {
 
   function handleUpdateUser({ name, about }) {
     api
-      .setUserInfo({ name, about })
+      .setUserInfo({ name, about }, token)
       .then((data) => {
         setCurrentUser(data);
       })
@@ -106,9 +106,9 @@ function App() {
 
   function handleUpdateAvatar({ avatar }) {
     api
-      .setAvatar(avatar.current.value)
+      .setAvatar(avatar.current.value, token)
       .then((data) => {
-        setCurrentUser(data);
+        setCurrentUser(data, token);
       })
       .catch((err) => console.log(err));
     closeAllPopups();
@@ -116,7 +116,7 @@ function App() {
 
   function handleAddNewCard({ title, link }) {
     api
-      .addNewCard({ title, link })
+      .addNewCard({ title, link }, token)
       .then((newCard) => {
         setCards([...cards, newCard]);
       })
@@ -130,7 +130,12 @@ function App() {
     auth
       .authorize(email, password)
       .then((data) => {
+        debugger;
         if (data && data.token) {
+          debugger;
+          console.log(data.token)
+          setToken(data.token);
+          localStorage.setItem('token', data.token);
           handleLogin();
         } else {
           resetForm();
@@ -184,10 +189,15 @@ function App() {
 
   React.useEffect(() => {
     const token = localStorage.getItem('token');
+    setToken(token);
+    localStorage.setItem('token', token);
+    debugger;
     if (token) {
+      debugger;
       auth
         .getContent(token)
         .then((res) => {
+          debugger;
           setLoggedIn(true);
           setUserEmail(res.data.email);
         })
@@ -207,11 +217,11 @@ function App() {
 
   React.useEffect(() => {
     api
-      .getUserInfo()
+      .getUserInfo(token)
       .then((data) => {
         setCurrentUser(data);
         api
-          .getCardList()
+          .getCardList(token)
           .then((data) => {
             if (data) {
               setCards((cards) => [...cards, ...data]);
@@ -224,7 +234,7 @@ function App() {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [token]);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>

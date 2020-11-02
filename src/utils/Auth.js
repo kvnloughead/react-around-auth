@@ -44,13 +44,13 @@ module.exports.getContent = (token) => {
       Authorization: `Bearer ${token}`,
     },
   }).then((res) => {
-    console.log(res)
+    console.log('getContnet res', res)
     return res.ok
       ? res.json()
       : Promise.reject(`${res.status} - ${res.message}`);
   })
   .then((data) => {
-    console.log(data);
+    console.log('getContent data', data);
     return data
   })
   .catch((err) => console.log(err))

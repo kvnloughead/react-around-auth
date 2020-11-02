@@ -4,9 +4,13 @@ class Api {
     this.headers = options.headers;
   }
 
-  getCardList() {
+  getCardList(token) {
+    debugger;
     return fetch(this.baseUrl + "/cards", {
-      headers: this.headers,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`
+      },
     }).then((res) => {
       if (res.ok) {
         return res.json();
@@ -14,9 +18,13 @@ class Api {
     });
   }
 
-  getUserInfo() {
+  getUserInfo(token) {
+    debugger;
     return fetch(this.baseUrl + "/users/me", {
-      headers: this.headers,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`
+      },
     }).then((res) => {
       console.log(res)
       if (res.ok) {
@@ -25,10 +33,13 @@ class Api {
     });
   }
 
-  setAvatar(link) {
+  setAvatar(link, token) {
     return fetch(this.baseUrl + "/users/me/avatar", {
       method: "PATCH",
-      headers: this.headers,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`
+      },
       body: JSON.stringify({
         avatar: link,
       }),
@@ -39,10 +50,13 @@ class Api {
     });
   }
 
-  setUserInfo({ name, about }) {
+  setUserInfo({ name, about }, token) {
     return fetch(this.baseUrl + "/users/me", {
       method: "PATCH",
-      headers: this.headers,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`
+      },
       body: JSON.stringify({
         name,
         about,
@@ -55,10 +69,13 @@ class Api {
     });
   }
 
-  addNewCard({ title, link }) {
+  addNewCard({ title, link }, token) {
     return fetch(this.baseUrl + "/cards", {
       method: "POST",
-      headers: this.headers,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`
+      },
       body: JSON.stringify({
         name: title,
         link,
@@ -71,20 +88,26 @@ class Api {
     });
   }
 
-  deleteCard(cardId) {
+  deleteCard(cardId, token) {
     return fetch(this.baseUrl + `/cards/${cardId}`, {
       method: "DELETE",
-      headers: this.headers,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`
+      },
     });
   }
 
-  updateLikes(cardId, isLiked) {  
+  updateLikes(cardId, isLiked, token) {  
     const method = isLiked ? "DELETE" : "PUT";
     return fetch(
       this.baseUrl + `/cards/likes/${cardId}`,
       {
         method: method,
-        headers: this.headers,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        },
       }
     ).then((res) => {
       if (res.ok) {
@@ -97,10 +120,6 @@ class Api {
 const api = new Api({
   // baseUrl: "https://around.nomoreparties.co/v1/group-2",
   baseUrl: "http://localhost:4000",
-  headers: {
-    // authorization: "dc340326-95ec-4474-9060-e6102316f742",  
-    "Content-Type": "application/json",
-  },
 });
 
 export default api;
