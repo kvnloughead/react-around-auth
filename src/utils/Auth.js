@@ -1,5 +1,5 @@
 // const BASE_URL = 'https://register.nomoreparties.co';
-const BASE_URL = 'http://localhost:4000';
+const BASE_URL = 'http://localhost:3001';
 
 module.exports.register = (email, password) => {
   return fetch(`${BASE_URL}/signup`, {
@@ -44,7 +44,7 @@ module.exports.getContent = (token) => {
       Authorization: `Bearer ${token}`,
     },
   }).then((res) => {
-    console.log('getContnet res', res)
+    console.log('getContent res', res)
     return res.ok
       ? res.json()
       : Promise.reject(`${res.status} - ${res.message}`);

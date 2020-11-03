@@ -38,7 +38,7 @@ function App() {
   const [tooltipMode, setTooltipMode] = React.useState(false);
   const [password, setPassword] = React.useState('');
   const [registered, setRegistered] = React.useState(false);
-  const [token, setToken] = React.useState(null);
+  const [token, setToken] = React.useState(localStorage.getItem('token'));
 
   const resetForm = () => {
     setEmail('');
@@ -125,6 +125,7 @@ function App() {
   }
 
   const handleLoginSubmit = (e) => {
+    debugger;
     e.preventDefault();
     const [email, password] = [e.target.email.value, e.target.password.value];
     auth
@@ -188,9 +189,9 @@ function App() {
   }
 
   React.useEffect(() => {
-    const token = localStorage.getItem('token');
-    setToken(token);
-    localStorage.setItem('token', token);
+    // const token = localStorage.getItem('token');
+    // setToken(token);
+    // localStorage.setItem('token', token);
     debugger;
     if (token) {
       debugger;
@@ -216,15 +217,18 @@ function App() {
   };
 
   React.useEffect(() => {
+    debugger;
     api
       .getUserInfo(token)
       .then((data) => {
         setCurrentUser(data);
         api
           .getCardList(token)
-          .then((data) => {
-            if (data) {
-              setCards((cards) => [...cards, ...data]);
+          .then((res) => {
+            debugger;
+            if (res.data) {
+
+              setCards((cards) => [...cards, ...res.data]);
             }
           })
           .catch((err) => {
