@@ -3,10 +3,10 @@ import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 
 function Card(props) {
-
+  debugger;
   const currentUser = React.useContext(CurrentUserContext);
 
-  const isOwned = currentUser && (props.card.owner._id === currentUser._id);
+  const isOwned = currentUser && (props.card.owner === currentUser._id);
   const cardDeleteButtonClassName = (
     `place__delete-btn ${!isOwned && 'place__delete-btn_hidden'}`
   );

@@ -74,6 +74,7 @@ function App() {
 
   function handleCardLike(card) {
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
+    debugger;
     api
       .updateLikes(card._id, isLiked, token)
       .then((newCard) => {
@@ -217,18 +218,14 @@ function App() {
   };
 
   React.useEffect(() => {
-    debugger;
     api
       .getUserInfo(token)
       .then((res) => {
-        debugger;
         setCurrentUser(res.data);
         api
           .getCardList(token)
           .then((res) => {
-            debugger;
             if (res.data) {
-              // setCards((cards) => [...cards, ...res.data]);
               setCards((cards) => res.data);
             }
           })
