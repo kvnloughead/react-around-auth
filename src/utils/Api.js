@@ -5,7 +5,7 @@ class Api {
   }
 
   getCardList(token) {
-    debugger;
+  
     return fetch(this.baseUrl + "/cards", {
       headers: {
         "Content-Type": "application/json",
@@ -19,7 +19,7 @@ class Api {
   }
 
   getUserInfo(token) {
-    debugger;
+  
     return fetch(this.baseUrl + "/users/me", {
       headers: {
         "Content-Type": "application/json",

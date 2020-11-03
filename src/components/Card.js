@@ -3,7 +3,7 @@ import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 
 function Card(props) {
-  debugger;
+
   const currentUser = React.useContext(CurrentUserContext);
 
   const isOwned = currentUser && (props.card.owner === currentUser._id);
@@ -11,7 +11,8 @@ function Card(props) {
     `place__delete-btn ${!isOwned && 'place__delete-btn_hidden'}`
   );
 
-  const isLiked = currentUser && props.card.likes.some(i => i._id === currentUser._id);
+  // const isLiked = currentUser && props.card.likes.some(i => i._id === currentUser._id);
+  const isLiked = currentUser && props.card.likes.includes(currentUser._id);
   const cardLikeButtonClassName = `place__like-btn ${isLiked && 'place__like-btn_clicked'}`;
 
   return (
@@ -34,9 +35,10 @@ function Card(props) {
         <h2 className="place__name">{props.card.name}</h2>
         <div className="place__like-container">
           <button
-            className={cardLikeButtonClassName}
+            className={`${cardLikeButtonClassName}${isLiked ? ' place__like-btn_clicked' : ''}`}
             aria-label="like-or-unlike-card"
             onClick={() => {
+            
               props.onCardLike(props.card);
             }}
           ></button>

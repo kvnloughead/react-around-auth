@@ -74,7 +74,7 @@ function App() {
 
   function handleCardLike(card) {
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
-    debugger;
+  
     api
       .updateLikes(card._id, isLiked, token)
       .then((newCard) => {
@@ -126,15 +126,15 @@ function App() {
   }
 
   const handleLoginSubmit = (e) => {
-    debugger;
+  
     e.preventDefault();
     const [email, password] = [e.target.email.value, e.target.password.value];
     auth
       .authorize(email, password)
       .then((data) => {
-        debugger;
+      
         if (data && data.token) {
-          debugger;
+        
           console.log(data.token)
           setToken(data.token);
           localStorage.setItem('token', data.token);
@@ -193,13 +193,13 @@ function App() {
     // const token = localStorage.getItem('token');
     // setToken(token);
     // localStorage.setItem('token', token);
-    debugger;
+  
     if (token) {
-      debugger;
+    
       auth
         .getContent(token)
         .then((res) => {
-          debugger;
+        
           setLoggedIn(true);
           setUserEmail(res.data.email);
         })

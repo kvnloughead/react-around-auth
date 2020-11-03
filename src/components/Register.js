@@ -45,7 +45,7 @@ function Register({ registered, handleRegisterSubmit, email, setEmail, password,
 
   useEffect(() => {
     if (registered) {
-      debugger; 
+     
       history.push('/signin');
     }
   }, [history, registered]);
