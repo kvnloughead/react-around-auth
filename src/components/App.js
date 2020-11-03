@@ -220,15 +220,16 @@ function App() {
     debugger;
     api
       .getUserInfo(token)
-      .then((data) => {
-        setCurrentUser(data);
+      .then((res) => {
+        debugger;
+        setCurrentUser(res.data);
         api
           .getCardList(token)
           .then((res) => {
             debugger;
             if (res.data) {
-
-              setCards((cards) => [...cards, ...res.data]);
+              // setCards((cards) => [...cards, ...res.data]);
+              setCards((cards) => res.data);
             }
           })
           .catch((err) => {
