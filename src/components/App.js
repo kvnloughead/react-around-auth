@@ -101,8 +101,8 @@ function App() {
   function handleUpdateUser({ name, about }) {
     api
       .setUserInfo({ name, about }, token)
-      .then((data) => {
-        setCurrentUser(data);
+      .then((res) => {
+        setCurrentUser(res.data);
       })
       .catch((err) => console.log(err));
     closeAllPopups();
