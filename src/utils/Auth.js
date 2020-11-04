@@ -24,7 +24,6 @@ module.exports.authorize = (identifier, password) => {
     body: JSON.stringify({ email: identifier, password: password }),
   })
     .then((res) => {
-      console.log(res)
       return res.json();
     })
     .then((data) => {
@@ -44,13 +43,11 @@ module.exports.getContent = (token) => {
       Authorization: `Bearer ${token}`,
     },
   }).then((res) => {
-    console.log('getContent res', res)
     return res.ok
       ? res.json()
       : Promise.reject(`${res.status} - ${res.message}`);
   })
   .then((data) => {
-    console.log('getContent data', data);
     return data
   })
   .catch((err) => console.log(err))

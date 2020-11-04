@@ -73,11 +73,7 @@ function App() {
   }
 
   function handleCardLike(card) {
-    debugger;
-
-    // const isLiked = card.likes.some((i) => i._id === currentUser._id);
     const isLiked = card.likes.includes(currentUser._id);
-  
     api
       .updateLikes(card._id, isLiked, token)
       .then((newCard) => {
@@ -129,16 +125,12 @@ function App() {
   }
 
   const handleLoginSubmit = (e) => {
-  
     e.preventDefault();
     const [email, password] = [e.target.email.value, e.target.password.value];
     auth
       .authorize(email, password)
-      .then((data) => {
-      
+      .then((data) => {      
         if (data && data.token) {
-        
-          console.log(data.token)
           setToken(data.token);
           localStorage.setItem('token', data.token);
           handleLogin();
@@ -193,16 +185,10 @@ function App() {
   }
 
   React.useEffect(() => {
-    // const token = localStorage.getItem('token');
-    // setToken(token);
-    // localStorage.setItem('token', token);
-  
     if (token) {
-    
       auth
         .getContent(token)
         .then((res) => {
-        
           setLoggedIn(true);
           setUserEmail(res.data.email);
         })

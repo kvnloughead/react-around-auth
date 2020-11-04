@@ -19,14 +19,12 @@ class Api {
   }
 
   getUserInfo(token) {
-  
     return fetch(this.baseUrl + "/users/me", {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`
       },
     }).then((res) => {
-      console.log(res)
       if (res.ok) {
         return res.json();
       }
