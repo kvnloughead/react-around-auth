@@ -7,38 +7,6 @@ import auth from '../utils/Auth';
 function Login({ loggedIn, email, setEmail, password, setPassword, handleLoginSubmit, userEmail, setUserEmail, onClose }) {
   const history = useHistory();
 
-  // const [email, setEmail] = useState('');
-  // const [password, setPassword] = useState('');
-
-  // const resetForm = () => {
-  //   setEmail('');
-  //   setPassword('');
-  // };
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   auth
-  //     .authorize(email, password)
-  //     .then((data) => {
-  //       if (!email || !password) {
-  //         throw new Error('400 - one or more of the fields were not provided');
-  //       }
-  //       if (!data) {
-  //         throw new Error('401 - the user with the specified email not found');
-  //       }
-  //       if (data.token) {
-  //         handleLogin();
-  //       } 
-  //     })
-  //     .then(() => {
-  //       resetForm();
-  //     })
-  //     .then(() => {
-  //       history.push('/around');
-  //     })
-  //     .catch((err) => console.log(err.message));
-  // };
-
   React.useEffect(() => {
     if (loggedIn) {
       history.push('/around');

@@ -45,7 +45,9 @@ module.exports.getContent = (token) => {
     return res.ok
       ? res.json()
       : Promise.reject(`${res.status} - ${res.message}`);
-  });
-  // .then((data) => data)
-  // .catch((err) => console.log(err))
+  })
+  .then((data) => {
+    return data
+  })
+  .catch((err) => console.log(err))
 };

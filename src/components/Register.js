@@ -1,41 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import '../blocks/splash-page/splash-page.css';
 import PopupWithForm from './PopupWithForm';
-import auth from '../utils/Auth';
 
 function Register({ registered, handleRegisterSubmit, email, setEmail, password, setPassword, onClose }) {
-  // const [email, setEmail] = useState('');
-  // const [password, setPassword] = useState('');
 
   const history = useHistory();
-
-  // const resetForm = () => {
-  //   setEmail('');
-  //   setPassword('');
-  // }
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   auth.register(email, password)
-  //     .then((res) => {
-  //       if (!res.data) {
-  //         handleToolTip('failure');
-  //         throw new Error(`400 - ${res.message ? res.message : res.error}`);
-  //       }})
-  //       .then((res) => {
-  //         history.push('/signin');
-  //         return res;
-  //       })
-  //       .then((res) => {
-  //         handleToolTip('success');
-  //         return res;
-  //       })
-  //     .then(resetForm)
-  //     .catch(err => {
-  //       console.log(err)
-  //     });
-  // }
 
   useEffect(() => {
     if (localStorage.getItem('token')) { 
@@ -45,7 +15,7 @@ function Register({ registered, handleRegisterSubmit, email, setEmail, password,
 
   useEffect(() => {
     if (registered) {
-      debugger; 
+     
       history.push('/signin');
     }
   }, [history, registered]);
