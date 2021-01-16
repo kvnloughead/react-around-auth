@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/react-around-auth/static/css/main.c65000f5.chunk.css",
-    "main.js": "/react-around-auth/static/js/main.64d01ff4.chunk.js",
-    "main.js.map": "/react-around-auth/static/js/main.64d01ff4.chunk.js.map",
+    "main.css": "/react-around-auth/static/css/main.3185a1d8.chunk.css",
+    "main.js": "/react-around-auth/static/js/main.e2ac17d1.chunk.js",
+    "main.js.map": "/react-around-auth/static/js/main.e2ac17d1.chunk.js.map",
     "runtime-main.js": "/react-around-auth/static/js/runtime-main.8f99e7eb.js",
     "runtime-main.js.map": "/react-around-auth/static/js/runtime-main.8f99e7eb.js.map",
-    "static/js/2.befbe997.chunk.js": "/react-around-auth/static/js/2.befbe997.chunk.js",
-    "static/js/2.befbe997.chunk.js.map": "/react-around-auth/static/js/2.befbe997.chunk.js.map",
+    "static/js/2.f1eebf58.chunk.js": "/react-around-auth/static/js/2.f1eebf58.chunk.js",
+    "static/js/2.f1eebf58.chunk.js.map": "/react-around-auth/static/js/2.f1eebf58.chunk.js.map",
     "index.html": "/react-around-auth/index.html",
-    "precache-manifest.2a3056f6e9af54d9dc69d897bf05261a.js": "/react-around-auth/precache-manifest.2a3056f6e9af54d9dc69d897bf05261a.js",
+    "precache-manifest.66b4c17344b3dd5e5fbadba41efbc5da.js": "/react-around-auth/precache-manifest.66b4c17344b3dd5e5fbadba41efbc5da.js",
     "service-worker.js": "/react-around-auth/service-worker.js",
-    "static/css/main.c65000f5.chunk.css.map": "/react-around-auth/static/css/main.c65000f5.chunk.css.map",
-    "static/js/2.befbe997.chunk.js.LICENSE.txt": "/react-around-auth/static/js/2.befbe997.chunk.js.LICENSE.txt",
+    "static/css/main.3185a1d8.chunk.css.map": "/react-around-auth/static/css/main.3185a1d8.chunk.css.map",
+    "static/js/2.f1eebf58.chunk.js.LICENSE.txt": "/react-around-auth/static/js/2.f1eebf58.chunk.js.LICENSE.txt",
     "static/media/index.css": "/react-around-auth/static/media/yosemite.bdf7042b.jpg",
     "static/media/checkmark.svg": "/react-around-auth/static/media/checkmark.75df9ada.svg",
     "static/media/header-logo.svg": "/react-around-auth/static/media/header-logo.71ad3aff.svg",
@@ -19,8 +19,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.8f99e7eb.js",
-    "static/js/2.befbe997.chunk.js",
-    "static/css/main.c65000f5.chunk.css",
-    "static/js/main.64d01ff4.chunk.js"
+    "static/js/2.f1eebf58.chunk.js",
+    "static/css/main.3185a1d8.chunk.css",
+    "static/js/main.e2ac17d1.chunk.js"
   ]
 }
