@@ -118,7 +118,7 @@ function App() {
     api
       .addNewCard({ title, link })
       .then((newCard) => {
-        setCards([...cards, newCard]);
+        setCards([newCard, ...cards]);
       })
       .catch((err) => console.log(err));
     closeAllPopups();
